@@ -32,14 +32,14 @@ export default function Bespoke() {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
         <div className="md:max-w-xl">
           <span className="text-xs uppercase tracking-[0.2em] font-bold text-stone-900 mb-4 block">
-            The Grand Union
+            Traditional & Modern Weddings
           </span>
           <h2 className="font-serif text-4xl md:text-[3.5rem] leading-[1.1] text-[#1b3225]">
-            Bespoke Wedding <br /> Experiences
+            Complete Wedding <br /> Experiences
           </h2>
         </div>
         <p className="text-stone-500 max-w-sm text-sm leading-relaxed border-l-2 border-[#d4af37] pl-4 font-light">
-          "Every thrill's a story, every structure a legacy. We weave these moments into a tapestry of lifelong memories."
+          "From small home functions to big destination weddings, we handle every detail so you can enjoy with your family."
         </p>
       </div>
 

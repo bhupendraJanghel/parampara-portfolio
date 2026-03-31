@@ -25,8 +25,8 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.1] mb-6 tracking-wide drop-shadow-xl"
         >
-           Crafting <span className="italic font-light opacity-90">Unforgettable</span> <br />
-           Celebrations
+           Making Your <br /> <span className="italic font-light opacity-90">Dream Events</span> <br />
+           Come True
         </motion.h1>
         
         <motion.p
@@ -35,7 +35,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="text-lg md:text-xl md:tracking-wide font-light text-white/90 mb-12"
         >
-          From Weddings to Private Events, We Bring Your Vision to Life
+          Specialists in Weddings and All Types of Family & Corporate Events
         </motion.p>
         
         <motion.div
@@ -48,14 +48,14 @@ export default function Hero() {
             href="#weddings"
             className="group flex items-center gap-2 px-8 py-4 rounded-full border border-white/40 hover:bg-white hover:text-stone-900 transition-all duration-300 backdrop-blur-sm"
           >
-            Explore Services 
+            See Our Work 
             <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link
             href="#contact"
             className="px-8 py-4 rounded-full bg-gradient-to-r from-[#c5a059] to-[#d4af37] text-stone-900 border border-transparent hover:scale-105 active:scale-95 transition-all duration-300 font-semibold"
           >
-            Book Consultation
+            Talk To Us
           </Link>
         </motion.div>
       </div>

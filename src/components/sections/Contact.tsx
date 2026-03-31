@@ -22,10 +22,10 @@ export default function Contact() {
             The Parampara Events
           </span>
           <h2 className="font-serif text-5xl md:text-6xl text-[#fbf8f1] mb-8 leading-tight">
-            Let's Design <br /> Your Legacy
+            Let’s Plan <br /> Your Event
           </h2>
           <p className="text-white/80 font-light leading-relaxed mb-12 max-w-md">
-            Whether it's an intimate gathering or a grand celebration, our team promises to honor your vision. Every detail matters, and it starts with a conversation.
+            Whether it’s a small family function or a grand party, our team is here to help. Just tell us what you need, and we’ll handle the rest.
           </p>
 
           <div className="space-y-6 mb-12 opacity-90 font-light">

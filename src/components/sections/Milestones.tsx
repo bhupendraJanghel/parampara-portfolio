@@ -5,23 +5,23 @@ import { Building2, Cake, Flame, Baby, ChevronRight } from "lucide-react";
 
 const milestones = [
   {
-    title: "Corporate Galas",
-    description: "Elevate your brand with sophisticated and professional events managed with perfect excellence.",
+    title: "Corporate Events",
+    description: "Launch your brand or host professional office events with perfect management and style.",
     icon: Building2,
   },
   {
-    title: "Majestic Birthdays",
-    description: "From intimate gatherings to grand celebrations, creating memorable events for your themes.",
+    title: "Grand Birthdays",
+    description: "From small parties to big themed celebrations, we make birthdays truly special for all ages.",
     icon: Cake,
   },
   {
-    title: "Religious Events",
-    description: "Graceful and traditionally rich rituals managed with serenity and sanctity.",
+    title: "Religious Functions",
+    description: "Beautiful arrangements for Pujas, Mata ki Chowki, and all traditional ceremonies.",
     icon: Flame,
   },
   {
-    title: "Baby Events",
-    description: "Welcome the newest impact with tenderness exactly tailored to your family's joy.",
+    title: "Baby Occasions",
+    description: "Celebrate the new arrival with cute themes for Baby Showers and Naming Ceremonies.",
     icon: Baby,
   },
 ];
@@ -38,7 +38,7 @@ export default function Milestones() {
           className="text-center mb-16"
         >
           <h2 className="font-serif text-4xl md:text-5xl text-[#1b3225]">
-            Life's Milestone Events
+            Celebrations for Every Occasion
           </h2>
         </motion.div>
 
