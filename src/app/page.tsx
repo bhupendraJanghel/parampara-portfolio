@@ -1,10 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/sections/Hero";
-import Bespoke from "@/components/sections/Bespoke";
-import Milestones from "@/components/sections/Milestones";
+import Weddings from "@/components/sections/Weddings";
+import ExtraEvents from "@/components/sections/ExtraEvents";
 import Gallery from "@/components/sections/Gallery";
-import Elements from "@/components/sections/Elements";
+import Services from "@/components/sections/Services";
+import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
 import Instagram from "@/components/sections/Instagram";
 
@@ -12,12 +13,13 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="flex-1 w-full bg-[#fbf8f1]">
+      <main id="home" className="flex-1 w-full bg-[#f7f1e6]">
         <Hero />
-        <Bespoke />
-        <Milestones />
+        <Weddings />
+        <ExtraEvents />
         <Gallery />
-        <Elements />
+        <Services />
+        <About />
         <Contact />
         <Instagram />
       </main>

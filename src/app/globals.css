@@ -6,16 +6,20 @@
   --color-gold: #c5a059;
   --color-gold-light: #d4af37;
   --color-cream: #fbf8f1;
-  
+
   --font-sans: var(--font-inter), sans-serif;
   --font-serif: var(--font-playfair), serif;
-  
-  /* Additional Tailwind 4 Utilities if necessary */
 }
 
 @layer base {
+  html {
+    background:
+      radial-gradient(circle at top, rgba(212, 175, 55, 0.08), transparent 28%),
+      linear-gradient(180deg, #f8f2e8 0%, #fbf8f1 35%, #f6efdf 100%);
+  }
+
   body {
-    background-color: #ffffff;
+    background-color: transparent;
     color: #171717;
   }
 }
