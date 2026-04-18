@@ -84,7 +84,7 @@ export default function About() {
                     <img
                       src={founder.image}
                       alt={founder.name}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent md:hidden" />
                   </div>
