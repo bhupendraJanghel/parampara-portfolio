@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ChevronRight, Sparkles } from "lucide-react";
+import BalloonBackground from "@/components/ui/BalloonBackground";
 
 const stats = [
   { value: "Weddings", label: "Luxury ceremonies and family celebrations" },
@@ -13,6 +14,7 @@ const stats = [
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
+      {/* Background Layer */}
       <div className="absolute inset-0 z-0">
         <img
           src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
@@ -22,6 +24,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.22),transparent_35%),linear-gradient(180deg,rgba(7,10,8,0.18),rgba(7,10,8,0.76))]" />
       </div>
 
+      {/* Main Content Layer */}
       <div className="relative z-10 mx-auto grid max-w-7xl gap-12 px-6 pb-14 pt-28 text-white lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
         <div className="max-w-4xl">
           <motion.h1
@@ -85,6 +88,21 @@ export default function Hero() {
             </div>
           ))}
         </motion.div>
+      </div>
+
+      {/* Helium Balloons Foreground Layer */}
+      <div className="absolute inset-0 z-20 pointer-events-none">
+        <BalloonBackground
+          count={20}
+          risingSpeed={0.2}
+          maxVelocity={0.08}
+          minSize={0.6}
+          maxSize={1.2}
+          colors={[
+            '#e0115f', '#0047ab', '#ffcf00', '#ff00ff',
+            '#00ced1', '#9370db', '#ff4500', '#2e8b57'
+          ]}
+        />
       </div>
     </section>
   );
