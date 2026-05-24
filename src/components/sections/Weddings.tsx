@@ -37,6 +37,7 @@ export default function Weddings() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
 
   const checkScroll = () => {
     const container = scrollContainerRef.current;
@@ -45,6 +46,34 @@ export default function Weddings() {
     setCanScrollRight(
       container.scrollLeft + container.clientWidth < container.scrollWidth - 5
     );
+
+    // Only track center card on mobile layouts (width < 768px)
+    if (window.innerWidth >= 768) {
+      setActiveCardIndex(null);
+      return;
+    }
+
+    const cardElements = container.querySelectorAll(".wedding-card");
+    const viewportCenter = window.innerWidth / 2;
+
+    let closestIndex: number | null = null;
+    let minDistance = Infinity;
+
+    cardElements.forEach((card, index) => {
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.left + rect.width / 2;
+      const distance = Math.abs(cardCenter - viewportCenter);
+
+      // Highlight the card that is closest to the screen center horizontally
+      if (distance < rect.width * 0.7) {
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIndex = index;
+        }
+      }
+    });
+
+    setActiveCardIndex(closestIndex);
   };
 
   useEffect(() => {
@@ -70,6 +99,8 @@ export default function Weddings() {
       behavior: "smooth",
     });
   };
+
+  const isCardActive = (idx: number) => activeCardIndex === idx;
 
   return (
     <section id="weddings" className="mx-auto max-w-7xl px-6 py-24">
@@ -124,7 +155,9 @@ export default function Weddings() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-20px" }}
               transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-              className="group relative aspect-[9/16] min-w-[260px] snap-center overflow-hidden rounded-[2rem] border border-[#d4af37]/30 shadow-[0_18px_50px_rgba(36,38,27,0.12)] transition-all duration-500 hover:border-[#d4af37]/90 md:min-w-0 cursor-pointer"
+              className={`wedding-card group relative aspect-[9/16] min-w-[260px] snap-center overflow-hidden rounded-[2rem] transition-all duration-500 hover:border-[#d4af37]/90 md:min-w-0 cursor-pointer ${
+                isCardActive(index) ? "scale-[0.99] border-[#d4af37]/90 shadow-lg" : "border-[#d4af37]/30"
+              }`}
               whileTap={{ scale: 0.98 }}
             >
               <Image
@@ -132,7 +165,9 @@ export default function Weddings() {
                 alt={card.title}
                 fill
                 sizes="(max-width: 768px) 260px, 20vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105 group-active:scale-105"
+                className={`object-cover transition-transform duration-700 group-hover:scale-105 group-active:scale-105 ${
+                  isCardActive(index) ? "scale-105" : ""
+                }`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/35 to-transparent" />
 
