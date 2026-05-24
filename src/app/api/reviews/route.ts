@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { Review } from "@/types";
 
 interface GoogleReviewItem {
   authorAttribution: {
@@ -15,7 +16,7 @@ interface GoogleReviewItem {
   };
 }
 
-const fallbackReviews = [
+const fallbackReviews: Review[] = [
   {
     quote: "Parampara Events designed the mandap for our wedding. The decor was absolutely stunning! The blend of marigolds and fresh roses was so elegant, and all our guests couldn't stop praising it.",
     name: "Aditi & Rahul",
@@ -25,6 +26,7 @@ const fallbackReviews = [
     rating: 5,
     initials: "AR",
     gradient: "from-[#e0cfab] to-[#c5a059]",
+    avatarUrl: null,
   },
   {
     quote: "Extremely professional wedding planners. The Sangeet stage lighting and sound were handled flawlessly with zero stress. Truly premium and value for money service.",
@@ -35,6 +37,7 @@ const fallbackReviews = [
     rating: 5,
     initials: "RS",
     gradient: "from-[#1b3225]/20 to-[#1b3225]/40",
+    avatarUrl: null,
   },
   {
     quote: "They turned our destination wedding in Goa into a fairytale. From the beachside welcome dinner styling to the main sunset ceremony decor, every detail was perfect.",
@@ -45,6 +48,7 @@ const fallbackReviews = [
     rating: 5,
     initials: "MV",
     gradient: "from-[#caa15c]/20 to-[#caa15c]/45",
+    avatarUrl: null,
   },
   {
     quote: "The attention to detail in the Mehendi setup was gorgeous. Very warm, cooperative team that accommodated all our last-minute requests patiently.",
@@ -55,6 +59,7 @@ const fallbackReviews = [
     rating: 5,
     initials: "PP",
     gradient: "from-[#f1d6a0] to-[#c5a059]",
+    avatarUrl: null,
   },
 ];
 
@@ -110,7 +115,7 @@ export async function GET() {
     });
 
     // Map Google reviews to our unified format
-    const reviews = rawReviews.map((r: GoogleReviewItem) => {
+    const reviews: Review[] = rawReviews.map((r: GoogleReviewItem) => {
       const authorName = r.authorAttribution?.displayName || "Google Reviewer";
       const nameParts = authorName.split(" ");
       const initials = nameParts.map((part) => part[0] || "").slice(0, 2).join("").toUpperCase() || "C";

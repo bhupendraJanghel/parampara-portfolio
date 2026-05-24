@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ChevronRight, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { ChevronRight } from "lucide-react";
 import BalloonBackground from "@/components/ui/BalloonBackground";
 
 const stats = [
@@ -16,10 +17,13 @@ export default function Hero() {
     <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
       {/* Background Layer */}
       <div className="absolute inset-0 z-0">
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
           alt="Wedding Mandap Celebration"
-          className="w-full h-full object-cover"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.22),transparent_35%),linear-gradient(180deg,rgba(7,10,8,0.18),rgba(7,10,8,0.76))]" />
       </div>

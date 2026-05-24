@@ -347,13 +347,15 @@ export const BalloonBackground: React.FC<BalloonProps> = ({
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     let rafId: number;
-    const clock = new THREE.Clock();
+    let lastTime = performance.now();
     const dummy = new THREE.Object3D();
     const tempQ = new THREE.Quaternion();
 
     const animate = () => {
       rafId = requestAnimationFrame(animate);
-      const delta = Math.min(clock.getDelta(), 0.1);
+      const now = performance.now();
+      const delta = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
 
       // Delay check
       const elapsed = Date.now() - startTimeRef.current;
@@ -361,8 +363,6 @@ export const BalloonBackground: React.FC<BalloonProps> = ({
 
       physics.update(delta, isPaused);
       const time = Date.now() * 0.001;
-      const scrollY = scrollData.y;
-      const parallaxFactor = 0.015;
 
       for (let i = 0; i < count; i++) {
         const baseIdx = i * 3;

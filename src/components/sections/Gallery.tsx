@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const images = [
   {
@@ -57,43 +58,97 @@ export default function Gallery() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: "-20px" }}
         transition={{ duration: 0.6 }}
         className="grid grid-cols-1 gap-4 h-auto md:grid-cols-4 md:grid-rows-2 md:h-[600px] lg:h-[700px]"
       >
-        <div className="group relative overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-2">
-          <img src={images[0].src} alt={images[0].label} className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60" />
-          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1">{images[0].label}</p>
-        </div>
+        <motion.div 
+          className="group relative overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-2 min-h-[300px] md:min-h-0 cursor-pointer"
+          whileTap={{ scale: 0.98 }}
+        >
+          <Image
+            src={images[0].src}
+            alt={images[0].label}
+            fill
+            sizes="(max-width: 768px) 100vw, 25vw"
+            className="object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100 group-active:scale-105 group-active:opacity-100"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60 group-active:opacity-60 pointer-events-none" />
+          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1 group-active:translate-x-1 z-10">{images[0].label}</p>
+        </motion.div>
 
-        <div className="group relative aspect-video overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-2 md:row-span-1 md:aspect-auto">
-          <img src={images[1].src} alt={images[1].label} className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60" />
-          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1">{images[1].label}</p>
-        </div>
+        <motion.div 
+          className="group relative aspect-video overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-2 md:row-span-1 md:aspect-auto cursor-pointer"
+          whileTap={{ scale: 0.98 }}
+        >
+          <Image
+            src={images[1].src}
+            alt={images[1].label}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100 group-active:scale-105 group-active:opacity-100"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60 group-active:opacity-60 pointer-events-none" />
+          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1 group-active:translate-x-1 z-10">{images[1].label}</p>
+        </motion.div>
 
-        <div className="group relative aspect-square overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-1 md:aspect-auto">
-          <img src={images[2].src} alt={images[2].label} className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60" />
-          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1">{images[2].label}</p>
-        </div>
+        <motion.div 
+          className="group relative aspect-square overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-1 md:aspect-auto cursor-pointer"
+          whileTap={{ scale: 0.98 }}
+        >
+          <Image
+            src={images[2].src}
+            alt={images[2].label}
+            fill
+            sizes="(max-width: 768px) 100vw, 25vw"
+            className="object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100 group-active:scale-105 group-active:opacity-100"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60 group-active:opacity-60 pointer-events-none" />
+          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1 group-active:translate-x-1 z-10">{images[2].label}</p>
+        </motion.div>
 
-        <div className="group relative aspect-square overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-1 md:aspect-auto">
-          <img src={images[3].src} alt={images[3].label} className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60" />
-          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1">{images[3].label}</p>
-        </div>
-        <div className="group relative aspect-square overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-1 md:aspect-auto">
-          <img src={images[4].src} alt={images[4].label} className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60" />
-          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1">{images[4].label}</p>
-        </div>
-        <div className="group relative aspect-square overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-1 md:aspect-auto">
-          <img src={images[5].src} alt={images[5].label} className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60" />
-          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1">{images[5].label}</p>
-        </div>
+        <motion.div 
+          className="group relative aspect-square overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-1 md:aspect-auto cursor-pointer"
+          whileTap={{ scale: 0.98 }}
+        >
+          <Image
+            src={images[3].src}
+            alt={images[3].label}
+            fill
+            sizes="(max-width: 768px) 100vw, 25vw"
+            className="object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100 group-active:scale-105 group-active:opacity-100"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60 group-active:opacity-60 pointer-events-none" />
+          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1 group-active:translate-x-1 z-10">{images[3].label}</p>
+        </motion.div>
+        <motion.div 
+          className="group relative aspect-square overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-1 md:aspect-auto cursor-pointer"
+          whileTap={{ scale: 0.98 }}
+        >
+          <Image
+            src={images[4].src}
+            alt={images[4].label}
+            fill
+            sizes="(max-width: 768px) 100vw, 25vw"
+            className="object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100 group-active:scale-105 group-active:opacity-100"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60 group-active:opacity-60 pointer-events-none" />
+          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1 group-active:translate-x-1 z-10">{images[4].label}</p>
+        </motion.div>
+        <motion.div 
+          className="group relative aspect-square overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-1 md:aspect-auto cursor-pointer"
+          whileTap={{ scale: 0.98 }}
+        >
+          <Image
+            src={images[5].src}
+            alt={images[5].label}
+            fill
+            sizes="(max-width: 768px) 100vw, 25vw"
+            className="object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100 group-active:scale-105 group-active:opacity-100"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60 group-active:opacity-60 pointer-events-none" />
+          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1 group-active:translate-x-1 z-10">{images[5].label}</p>
+        </motion.div>
       </motion.div>
     </section>
   );

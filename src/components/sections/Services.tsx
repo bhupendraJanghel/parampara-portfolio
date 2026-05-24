@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   Camera,
   Gift,
@@ -15,6 +16,7 @@ import {
   ChevronRight,
   ThumbsUp,
 } from "lucide-react";
+import { Review } from "@/types";
 
 const elements = [
   { name: "Decoration", icon: Sparkles },
@@ -76,17 +78,7 @@ const SkeletonCard = () => (
   </div>
 );
 
-interface Review {
-  quote: string;
-  name: string;
-  location: string;
-  date: string;
-  publishTime: string;
-  rating: number;
-  initials: string;
-  gradient: string;
-  avatarUrl: string | null;
-}
+// Unified Review type is imported from "@/types"
 
 export default function Services() {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -354,11 +346,13 @@ export default function Services() {
                       <div className="mb-4 flex items-start justify-between relative z-10">
                         <div className="flex items-center gap-3">
                           {r.avatarUrl ? (
-                            <img
+                            <Image
                               src={r.avatarUrl}
                               alt={r.name}
+                              width={40}
+                              height={40}
+                              unoptimized
                               className="h-10 w-10 rounded-full object-cover shadow-inner border border-stone-100"
-                              referrerPolicy="no-referrer"
                             />
                           ) : (
                             <div className={`flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br ${r.gradient} font-sans text-xs font-bold text-stone-800 shadow-inner`}>

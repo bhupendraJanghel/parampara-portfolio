@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Baby, Building2, Cake, ChevronRight, Flame } from "lucide-react";
 
 const milestones = [
@@ -37,7 +38,7 @@ export default function ExtraEvents() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 0.6 }}
           className="mb-8 flex flex-col gap-3 text-center"
         >
@@ -61,16 +62,19 @@ export default function ExtraEvents() {
               key={item.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "-20px" }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative flex flex-col overflow-hidden rounded-[1.25rem] border border-[#d4af37]/25 bg-white shadow-[0_18px_50px_rgba(36,38,27,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(36,38,27,0.12)]"
+              className="group relative flex flex-col overflow-hidden rounded-[1.25rem] border border-[#d4af37]/25 bg-white shadow-[0_18px_50px_rgba(36,38,27,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(36,38,27,0.12)] cursor-pointer"
+              whileTap={{ scale: 0.98 }}
             >
               {/* Image Section */}
               <div className="relative h-40 w-full sm:h-48">
-                <img
+                <Image
                   src={item.imageUrl}
                   alt={item.title}
-                  className="absolute inset-0 h-full w-full object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105 group-active:scale-105"
                 />
                 {/* Fade to white at bottom */}
                 <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none" />

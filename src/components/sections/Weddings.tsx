@@ -1,6 +1,9 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const cards = [
   {
@@ -31,6 +34,43 @@ const cards = [
 ];
 
 export default function Weddings() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScroll = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    setCanScrollLeft(container.scrollLeft > 5);
+    setCanScrollRight(
+      container.scrollLeft + container.clientWidth < container.scrollWidth - 5
+    );
+  };
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    checkScroll();
+    container.addEventListener("scroll", checkScroll, { passive: true });
+    window.addEventListener("resize", checkScroll);
+
+    return () => {
+      container.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, []);
+
+  const scroll = (direction: "left" | "right") => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const scrollAmount = 280; // card width + gap
+    container.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section id="weddings" className="mx-auto max-w-7xl px-6 py-24">
       <div className="mb-16 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
@@ -50,33 +90,63 @@ export default function Weddings() {
         </p>
       </div>
 
-      <div className="hide-scroll flex snap-x snap-mandatory gap-4 overflow-x-auto pb-8 md:grid md:grid-cols-5 md:gap-4 md:pb-0">
-        {cards.map((card, index) => (
-          <motion.div
-            key={card.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-            className="group relative aspect-[9/16] min-w-[260px] snap-center overflow-hidden rounded-[2rem] border border-[#d4af37]/30 shadow-[0_18px_50px_rgba(36,38,27,0.12)] transition-all duration-500 hover:border-[#d4af37]/90 md:min-w-0"
+      <div className="relative group/scroll">
+        {/* Left Chevron Button */}
+        {canScrollLeft && (
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4af37]/40 bg-stone-950/80 text-[#fbf8f1] shadow-[0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-sm transition-all hover:bg-stone-900 hover:border-[#d4af37] active:scale-90 md:hidden"
+            aria-label="Scroll left"
           >
-            <img
-              src={card.imageUrl}
-              alt={card.title}
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/35 to-transparent" />
+            <ChevronLeft size={20} className="text-[#caa15c]" />
+          </button>
+        )}
 
-            <div className="absolute inset-x-0 bottom-0 p-8 text-left">
-              <h3 className="font-serif text-2xl tracking-wide text-[#fbf8f1]">
-                {card.title}
-              </h3>
-              <p className="mt-3 max-w-xs text-sm leading-6 text-white/78">
-                {card.detail}
-              </p>
-            </div>
-          </motion.div>
-        ))}
+        {/* Right Chevron Button */}
+        {canScrollRight && (
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4af37]/40 bg-stone-950/80 text-[#fbf8f1] shadow-[0_4px_12px_rgba(0,0,0,0.4)] backdrop-blur-sm transition-all hover:bg-stone-900 hover:border-[#d4af37] active:scale-90 md:hidden"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={20} className="text-[#caa15c]" />
+          </button>
+        )}
+
+        <div
+          ref={scrollContainerRef}
+          className="hide-scroll flex snap-x snap-mandatory gap-4 overflow-x-auto pb-8 md:grid md:grid-cols-5 md:gap-4 md:pb-0"
+        >
+          {cards.map((card, index) => (
+            <motion.div
+              key={card.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-20px" }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+              className="group relative aspect-[9/16] min-w-[260px] snap-center overflow-hidden rounded-[2rem] border border-[#d4af37]/30 shadow-[0_18px_50px_rgba(36,38,27,0.12)] transition-all duration-500 hover:border-[#d4af37]/90 md:min-w-0 cursor-pointer"
+              whileTap={{ scale: 0.98 }}
+            >
+              <Image
+                src={card.imageUrl}
+                alt={card.title}
+                fill
+                sizes="(max-width: 768px) 260px, 20vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105 group-active:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/35 to-transparent" />
+
+              <div className="absolute inset-x-0 bottom-0 p-8 text-left">
+                <h3 className="font-serif text-2xl tracking-wide text-[#fbf8f1]">
+                  {card.title}
+                </h3>
+                <p className="mt-3 max-w-xs text-sm leading-6 text-white/78">
+                  {card.detail}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       <style dangerouslySetInnerHTML={{

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Crown, Sparkles, Store } from "lucide-react";
 
 const founders = [
@@ -44,7 +45,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mb-14 max-w-3xl"
         >
@@ -71,20 +72,23 @@ export default function About() {
                 key={founder.name}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-20px" }}
                 transition={{
                   duration: 0.7,
                   delay: index * 0.12,
                   ease: "easeOut",
                 }}
-                className="group overflow-hidden rounded-[2.5rem] border border-white/60 bg-white/70 shadow-[0_20px_80px_rgba(31,35,23,0.08)] backdrop-blur"
+                className="group overflow-hidden rounded-[2.5rem] border border-white/60 bg-white/70 shadow-[0_20px_80px_rgba(31,35,23,0.08)] backdrop-blur cursor-pointer"
+                whileTap={{ scale: 0.99 }}
               >
                 <div className="flex flex-col md:flex-row">
                   <div className="relative h-64 w-full md:h-auto md:w-56 lg:w-64">
-                    <img
+                    <Image
                       src={founder.image}
                       alt={founder.name}
-                      className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 224px, 256px"
+                      className="object-cover object-top transition-transform duration-700 group-hover:scale-105 group-active:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent md:hidden" />
                   </div>
@@ -118,7 +122,7 @@ export default function About() {
           <motion.aside
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="rounded-[2rem] bg-[#1c2a21] p-8 text-[#f7f1e6] shadow-[0_30px_100px_rgba(24,35,26,0.28)]"
           >
