@@ -4,27 +4,27 @@ import { motion } from "framer-motion";
 
 const images = [
   {
-    src: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800",
+    src: "/gallery/wedding_stage.png",
     label: "Wedding Stage Styling",
   },
   {
-    src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800",
+    src: "/gallery/reception_ambience.png",
     label: "Reception Ambience",
   },
   {
-    src: "https://images.unsplash.com/photo-1505932794465-147d1f1bce2d?auto=format&fit=crop&q=80&w=800",
+    src: "/gallery/guest_experience.png",
     label: "Guest Experience Design",
   },
   {
-    src: "https://images.unsplash.com/photo-1544067977-8d070b43dff6?auto=format&fit=crop&q=80&w=800",
+    src: "/gallery/mehendi_styling.png",
     label: "Mehendi Styling",
   },
   {
-    src: "https://images.unsplash.com/photo-1530103862676-de8892bc6cb4?auto=format&fit=crop&q=80&w=800",
+    src: "/gallery/destination_setup.png",
     label: "Destination Setup Mood",
   },
   {
-    src: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&q=80&w=800",
+    src: "/gallery/sangeet_energy.png",
     label: "Sangeet Energy",
   },
 ];
@@ -61,38 +61,38 @@ export default function Gallery() {
         transition={{ duration: 0.6 }}
         className="grid grid-cols-1 gap-4 h-auto md:grid-cols-4 md:grid-rows-2 md:h-[600px] lg:h-[700px]"
       >
-        <div className="group relative overflow-hidden rounded-[1.8rem] md:col-span-1 md:row-span-2">
-          <img src={images[0].src} alt={images[0].label} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-          <p className="absolute bottom-5 left-5 font-serif text-xl text-white">{images[0].label}</p>
+        <div className="group relative overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-2">
+          <img src={images[0].src} alt={images[0].label} className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60" />
+          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1">{images[0].label}</p>
         </div>
 
-        <div className="group relative aspect-video overflow-hidden rounded-[1.8rem] md:col-span-2 md:row-span-1 md:aspect-auto">
-          <img src={images[1].src} alt={images[1].label} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-          <p className="absolute bottom-5 left-5 font-serif text-xl text-white">{images[1].label}</p>
+        <div className="group relative aspect-video overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-2 md:row-span-1 md:aspect-auto">
+          <img src={images[1].src} alt={images[1].label} className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60" />
+          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1">{images[1].label}</p>
         </div>
 
-        <div className="group relative aspect-square overflow-hidden rounded-[1.8rem] md:col-span-1 md:row-span-1 md:aspect-auto">
-          <img src={images[2].src} alt={images[2].label} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-          <p className="absolute bottom-5 left-5 font-serif text-xl text-white">{images[2].label}</p>
+        <div className="group relative aspect-square overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-1 md:aspect-auto">
+          <img src={images[2].src} alt={images[2].label} className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60" />
+          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1">{images[2].label}</p>
         </div>
 
-        <div className="group relative aspect-square overflow-hidden rounded-[1.8rem] md:col-span-1 md:row-span-1 md:aspect-auto">
-          <img src={images[3].src} alt={images[3].label} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-          <p className="absolute bottom-5 left-5 font-serif text-xl text-white">{images[3].label}</p>
+        <div className="group relative aspect-square overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-1 md:aspect-auto">
+          <img src={images[3].src} alt={images[3].label} className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60" />
+          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1">{images[3].label}</p>
         </div>
-        <div className="group relative aspect-square overflow-hidden rounded-[1.8rem] md:col-span-1 md:row-span-1 md:aspect-auto">
-          <img src={images[4].src} alt={images[4].label} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-          <p className="absolute bottom-5 left-5 font-serif text-xl text-white">{images[4].label}</p>
+        <div className="group relative aspect-square overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-1 md:aspect-auto">
+          <img src={images[4].src} alt={images[4].label} className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60" />
+          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1">{images[4].label}</p>
         </div>
-        <div className="group relative aspect-square overflow-hidden rounded-[1.8rem] md:col-span-1 md:row-span-1 md:aspect-auto">
-          <img src={images[5].src} alt={images[5].label} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-          <p className="absolute bottom-5 left-5 font-serif text-xl text-white">{images[5].label}</p>
+        <div className="group relative aspect-square overflow-hidden rounded-[1.8rem] bg-stone-900 md:col-span-1 md:row-span-1 md:aspect-auto">
+          <img src={images[5].src} alt={images[5].label} className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-700 group-hover:opacity-60" />
+          <p className="absolute bottom-5 left-5 font-serif text-xl text-white transition-transform duration-500 group-hover:translate-x-1">{images[5].label}</p>
         </div>
       </motion.div>
     </section>

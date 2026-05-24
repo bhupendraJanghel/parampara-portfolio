@@ -1,25 +1,33 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() || 0;
+    if (latest > previous && latest > 150) {
+      setHidden(true); // Hide when scrolling down past 150px
+    } else {
+      setHidden(false); // Show when scrolling up
+    }
+    setScrolled(latest > 50);
+  });
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-100%" },
+      }}
+      initial="visible"
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
       className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
         scrolled
           ? "bg-[#111712]/70 text-[#f7f1e6] backdrop-blur-xl shadow-[0_10px_40px_rgba(15,17,15,0.14)]"

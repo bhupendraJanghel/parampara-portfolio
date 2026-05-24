@@ -5,28 +5,28 @@ import { motion } from "framer-motion";
 const cards = [
   {
     title: "Haldi",
-    imageUrl: "https://images.unsplash.com/photo-1583089892943-e02e52f182fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    detail: "Bright rituals styled with floral textures, marigold palettes, and joyful family moments.",
+    imageUrl: "/haldi/haldi_2.png",
+    detail: "Beautiful flower decorations and happy family moments.",
   },
   {
     title: "Mehendi",
-    imageUrl: "https://images.unsplash.com/photo-1544067977-8d070b43dff6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    detail: "Interactive lounge layouts, artisanal decor, and a warm festive guest experience.",
+    imageUrl: "/mehendi/mehndi_3.png",
+    detail: "Comfortable seating, beautiful decorations, and a fun time for guests.",
   },
   {
     title: "Wedding",
-    imageUrl: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    detail: "Elegant mandaps, refined stage styling, and complete ceremony coordination.",
+    imageUrl: "/wedding/wedding_2.png",
+    detail: "Beautiful mandaps, elegant stages, and smooth ceremony planning.",
   },
   {
     title: "Sangeet",
-    imageUrl: "https://images.unsplash.com/photo-1621801306180-2d88c42b0ce8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    detail: "High-energy evenings with lighting, sound, choreography support, and standout production.",
+    imageUrl: "/sangeet/sangeet_3.png",
+    detail: "Fun nights with great lights, music, dancing, and grand setups.",
   },
   {
     title: "Reception",
-    imageUrl: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    detail: "Premium ambience for the grand reveal, guest hospitality, and timeless photo moments.",
+    imageUrl: "/reception/reception_1.png",
+    detail: "A grand and elegant party to welcome guests and capture great photos.",
   },
 ];
 
@@ -68,9 +68,6 @@ export default function Weddings() {
             <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/35 to-transparent" />
 
             <div className="absolute inset-x-0 bottom-0 p-8 text-left">
-              <p className="mb-3 text-[11px] uppercase tracking-[0.28em] text-[#eac98f]">
-                Signature Experience
-              </p>
               <h3 className="font-serif text-2xl tracking-wide text-[#fbf8f1]">
                 {card.title}
               </h3>
@@ -82,7 +79,8 @@ export default function Weddings() {
         ))}
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
       `}} />

@@ -188,10 +188,11 @@ export const BalloonBackground: React.FC<BalloonProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const startTimeRef = useRef<number>(Date.now());
+  const startTimeRef = useRef<number>(0);
   const isMobileRef = useRef<boolean>(false);
 
   useEffect(() => {
+    startTimeRef.current = Date.now();
     isMobileRef.current = window.innerWidth < 768;
     const canvas = canvasRef.current;
     const parent = containerRef.current;
@@ -308,14 +309,14 @@ export const BalloonBackground: React.FC<BalloonProps> = ({
       renderer.setSize(w, h);
       const aspect = w / h;
       camera.aspect = aspect;
-      
+
       // Dynamic zoom: On narrow screens, push the camera back to maintain coverage
       if (aspect < 1) {
         camera.position.z = 20 / aspect; // Proportionally zoom out
       } else {
         camera.position.z = 20;
       }
-      
+
       camera.updateProjectionMatrix();
 
       const fovRad = (camera.fov * Math.PI) / 180;
@@ -369,11 +370,9 @@ export const BalloonBackground: React.FC<BalloonProps> = ({
         const posY = physics.positionData[baseIdx + 1];
         const posZ = physics.positionData[baseIdx + 2];
 
-        // Apply Parallax: Shift Y based on scroll
-        const depthEffect = (posZ + 5) / 10;
-        const finalY = posY + (scrollY * parallaxFactor * (1 + depthEffect));
-        // Apply Depth Zoom: Balloons move closer as you scroll
-        const finalZ = posZ + (scrollY * 0.005);
+        // Parallax and Depth Zoom removed per user request
+        const finalY = posY;
+        const finalZ = posZ;
 
         dummy.position.set(posX, finalY, finalZ);
         const s = (i === 0 && followCursor) ? 0.001 : physics.sizeData[i];
