@@ -5,6 +5,7 @@ import Weddings from "@/components/sections/Weddings";
 import ExtraEvents from "@/components/sections/ExtraEvents";
 import Gallery from "@/components/sections/Gallery";
 import Services from "@/components/sections/Services";
+import GoogleReviews from "@/components/sections/GoogleReviews";
 import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
 import Instagram from "@/components/sections/Instagram";
@@ -19,11 +20,14 @@ export default function Home() {
         <ExtraEvents />
         <Gallery />
         <Services />
+        <GoogleReviews />
+        <Instagram />
         <About />
         <Contact />
-        <Instagram />
+        <Footer />
       </main>
-      <Footer />
+
     </>
   );
 }
+

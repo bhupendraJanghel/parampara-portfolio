@@ -1,20 +1,38 @@
 import Link from "next/link";
 import { ArrowUpRight, MapPin } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="relative mt-16 bg-[#1b3225] px-6 py-16 text-[#fbf8f1]">
+    <footer className="relative bg-[#1b3225] px-6 py-16 text-[#fbf8f1]">
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-12 md:flex-row">
         <div className="max-w-sm">
-          <h2 className="mb-6 font-serif text-3xl italic tracking-wider">Parampara Events</h2>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="relative w-16 h-16 shrink-0">
+              <Image
+                src="/parampara-logo.png"
+                alt="Parampara Events Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="font-serif text-xl font-bold tracking-[0.25em] leading-none text-white">
+                PARAMPARA
+              </span>
+              <span className="font-sans text-[9px] font-semibold tracking-[0.25em] text-[#caa56c] mt-2.5 leading-none">
+                DECOR & EVENTS
+              </span>
+            </div>
+          </div>
           <p className="mb-6 text-sm font-light leading-relaxed text-[#c5a059] opacity-90">
             A premium event planning and decor presentation built to show
             clients the quality, style, and execution Parampara Events can
             deliver.
           </p>
           <div className="flex gap-4 opacity-80">
-            <Link href="#" className="transition-colors hover:text-[#d4af37]"><span className="flex items-center gap-1 text-sm font-sans uppercase">Instagram <ArrowUpRight size={14}/></span></Link>
-            <Link href="#" className="transition-colors hover:text-[#d4af37]"><span className="flex items-center gap-1 text-sm font-sans uppercase">Facebook <ArrowUpRight size={14}/></span></Link>
+            <Link href="#" className="transition-colors hover:text-[#d4af37]"><span className="flex items-center gap-1 text-sm font-sans uppercase">Instagram <ArrowUpRight size={14} /></span></Link>
+            <Link href="#" className="transition-colors hover:text-[#d4af37]"><span className="flex items-center gap-1 text-sm font-sans uppercase">Facebook <ArrowUpRight size={14} /></span></Link>
           </div>
         </div>
 

@@ -1,162 +1,283 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Crown, Sparkles, Store } from "lucide-react";
+import {
+  Crown,
+  Sparkles,
+  Award,
+  Users,
+  Compass,
+  Palette,
+  Calendar,
+  Flower2,
+  Handshake,
+  ShieldCheck,
+  Heart,
+  Bell,
+  Store,
+} from "lucide-react";
+
+
 
 const founders = [
   {
     name: "Rumesh Janghel",
-    role: "Founder",
-    subtitle: "Parampara Event Planner",
+    role: "FOUNDER",
+    title: "PARAMPARA EVENT PLANNER",
     description:
-      "Rumesh leads the planning vision behind Parampara Events, shaping each celebration with clear communication, steady coordination, and a refined sense of how an event should feel from the first guest arrival to the final farewell.",
-    icon: Crown,
+      "Leads event planning, coordination, and client experience with a focus on creating seamless and meaningful celebrations.",
+    expertise: "Planning & Coordination",
+    expertiseIcon: Compass,
+    floatingIcon: Crown,
     image: "/images/rumesh.png",
   },
   {
     name: "Nitesh Janghel",
-    role: "Co-Founder",
-    subtitle: "Owner of Parampara Decor Shop",
+    role: "CO-FOUNDER",
+    title: "OWNER OF PARAMPARA DECOR SHOP",
     description:
-      "Nitesh strengthens the brand with decor expertise, transforming concepts into premium stage setups, floral styling, immersive themes, and visual details that help every event look polished and memorable.",
-    icon: Store,
+      "Heads decor design, styling, and event setup execution with an eye for detail and premium finishes.",
+    expertise: "Decor & Styling",
+    expertiseIcon: Palette,
+    floatingIcon: Store,
     image: "/images/nitesh.png",
   },
 ];
 
-const pillars = [
-  "Planning that balances family tradition with modern presentation",
-  "Decor execution that feels premium in person and in photographs",
-  "A flexible team for weddings, social functions, and branded events",
+const features = [
+  {
+    title: "Planning & Coordination",
+    description: "From concept to execution, we plan every detail to perfection.",
+    icon: Calendar,
+  },
+  {
+    title: "Premium Decor Execution",
+    description: "Elegant themes, fresh florals, and stunning setups that bring your vision to life.",
+    icon: Flower2,
+  },
+  {
+    title: "Weddings, Corporate & Social Events",
+    description: "We create memorable experiences for every occasion and every kind of celebration.",
+    icon: Users,
+  },
+  {
+    title: "End-to-End Service",
+    description: "One dedicated team handling everything so you can relax and enjoy.",
+    icon: Handshake,
+  },
 ];
 
 export default function About() {
+  const [yearsOfExperience, setYearsOfExperience] = useState(6);
+
+  useEffect(() => {
+    const startYear = 2022;
+    const currentYear = new Date().getFullYear();
+    setYearsOfExperience(currentYear - startYear);
+  }, []);
+
+  const stats = [
+    {
+      value: `${yearsOfExperience}+ Years`,
+      label: "EXPERIENCE",
+      icon: Award,
+    },
+    {
+      value: "100+",
+      label: "EVENTS DELIVERED",
+      icon: Sparkles,
+    },
+    {
+      value: "Trusted",
+      label: "BY FAMILIES & BUSINESSES",
+      icon: Users,
+    },
+  ];
+
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-[#f3ead9] px-6 py-24 text-[#1d241d]"
+      className="relative overflow-hidden bg-[#faf6ee] px-6 py-24 text-[#1b3225]"
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b88a44]/60 to-transparent" />
-      <div className="absolute -right-20 top-12 h-72 w-72 rounded-full bg-[#d2a45c]/10 blur-3xl" />
-      <div className="absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-[#233328]/10 blur-3xl" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b88a44]/35 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-20px" }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="mb-14 max-w-3xl"
-        >
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#b88a44]/30 bg-white/60 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8e6629]">
-            <Sparkles size={14} />
+        {/* Header Section */}
+        <div className="flex flex-col items-center text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#c5a059]/40 bg-[#fbf8f1] px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#9f7637] shadow-sm">
             The Team Behind Parampara
           </span>
-          <h2 className="font-serif text-4xl leading-tight text-[#1b3225] md:text-6xl">
-            Built by planners and decor specialists who know how to turn ideas
-            into memorable experiences.
+          <h2 className="mt-6 font-serif text-4xl leading-tight text-[#1b3225] md:text-5xl lg:text-6xl font-medium tracking-tight">
+            Meet the People Behind Parampara
           </h2>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-stone-700 md:text-lg">
-            Parampara Events is built to give clients confidence before the
-            event even begins. We combine planning, decor, styling, and
-            execution so every function feels polished, intentional, and deeply
-            personal.
+          <p className="mt-3 text-sm font-sans font-medium text-[#a27e36] md:text-base">
+            Turning celebrations into unforgettable experiences.
           </p>
-        </motion.div>
 
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="grid gap-6">
-            {founders.map((founder, index) => (
-              <motion.article
-                key={founder.name}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-20px" }}
-                transition={{
-                  duration: 0.7,
-                  delay: index * 0.12,
-                  ease: "easeOut",
-                }}
-                className="group overflow-hidden rounded-[2.5rem] border border-white/60 bg-white/70 shadow-[0_20px_80px_rgba(31,35,23,0.08)] backdrop-blur cursor-pointer"
-                whileTap={{ scale: 0.99 }}
-              >
-                <div className="flex flex-col md:flex-row">
-                  <div className="relative h-64 w-full md:h-auto md:w-56 lg:w-64">
-                    <Image
-                      src={founder.image}
-                      alt={founder.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 224px, 256px"
-                      className="object-cover object-top transition-transform duration-700 group-hover:scale-105 group-active:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent md:hidden" />
-                  </div>
+          {/* Central Ornament */}
+          <div className="flex items-center justify-center gap-4 my-8 w-full max-w-md mx-auto">
+            <div className="h-[1px] bg-gradient-to-r from-transparent to-[#c5a059]/40 flex-grow" />
+            <div className="relative w-12 h-12 shrink-0">
+              <Image
+                src="/parampara-logo.png"
+                alt="Parampara Gold Medallion Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div className="h-[1px] bg-gradient-to-l from-transparent to-[#c5a059]/40 flex-grow" />
+          </div>
+        </div>
 
-                  <div className="flex-1 p-8">
-                    <div className="mb-6 flex items-start justify-between gap-6">
-                      <div>
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#9f7637]">
-                          {founder.role}
-                        </p>
-                        <h3 className="mt-2 font-serif text-3xl text-[#1b3225]">
-                          {founder.name}
-                        </h3>
-                        <p className="mt-1 text-sm font-medium uppercase tracking-[0.2em] text-stone-500">
-                          {founder.subtitle}
-                        </p>
-                      </div>
-                      <div className="hidden rounded-full border border-[#caa56c]/40 bg-[#f5ecdc] p-3 text-[#8c6631] transition-transform duration-500 group-hover:-translate-y-1 sm:block">
-                        <founder.icon size={20} />
-                      </div>
-                    </div>
-                    <p className="text-base leading-7 text-stone-700">
-                      {founder.description}
-                    </p>
-                  </div>
+        {/* Statistics & Trust Bar */}
+        <div className="mx-auto max-w-4xl text-center mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-3xl mx-auto">
+            {stats.map((stat, i) => (
+              <div key={i} className="flex items-center gap-4 text-left justify-start md:justify-center">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#fbf8f1] border border-stone-200/60 text-[#c5a059] shadow-sm">
+                  <stat.icon size={22} strokeWidth={1.5} />
                 </div>
-              </motion.article>
+                <div className="flex flex-col">
+                  <span className="font-serif text-base sm:text-lg font-bold text-[#1b3225] leading-tight">
+                    {stat.value}
+                  </span>
+                  <span className="font-sans text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-stone-500 mt-0.5">
+                    {stat.label}
+                  </span>
+                </div>
+              </div>
             ))}
           </div>
 
-          <motion.aside
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-20px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="rounded-[2rem] bg-[#1c2a21] p-8 text-[#f7f1e6] shadow-[0_30px_100px_rgba(24,35,26,0.28)]"
-          >
-            <p className="text-[11px] uppercase tracking-[0.3em] text-[#d8b374]">
-              Why Clients Remember Us
-            </p>
-            <ul className="mt-8 space-y-6">
-              {pillars.map((pillar) => (
-                <li
-                  key={pillar}
-                  className="flex items-start gap-4 border-b border-white/10 pb-6 last:border-b-0 last:pb-0"
-                >
-                  <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[#d8b374]" />
-                  <span className="text-base leading-7 text-white/82">{pillar}</span>
-                </li>
-              ))}
-            </ul>
+          <p className="text-xs sm:text-sm text-stone-600 mt-8 font-medium">
+            Trusted by families, businesses, and communities across{" "}
+            <span className="font-bold text-[#1b3225]">Chhattisgarh</span>.
+          </p>
+        </div>
 
-            <div className="mt-10 grid grid-cols-2 gap-4">
-              <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
-                <p className="text-3xl font-semibold text-white">End-to-end</p>
-                <p className="mt-2 text-sm leading-6 text-white/65">
-                  Planning, decor, guest experience, and on-ground execution in
-                  one team.
-                </p>
+        {/* 2-Column Main Layout Grid */}
+        <div className="grid gap-8 lg:grid-cols-2 max-w-7xl mx-auto">
+
+          {/* Left Column - Founders Container */}
+          <div className="flex flex-col gap-6">
+            {founders.map((founder, index) => (
+              <motion.div
+                key={founder.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex flex-col md:flex-row rounded-[2rem] overflow-hidden bg-white border border-stone-200/40 shadow-sm relative"
+              >
+                {/* Founder Image */}
+                <div className="relative h-64 w-full md:h-auto md:w-52 lg:w-56 shrink-0 bg-stone-50">
+                  <Image
+                    src={founder.image}
+                    alt={founder.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 224px"
+                    className="object-cover object-top"
+                  />
+                </div>
+
+                {/* Founder Details */}
+                <div className="p-6 lg:p-8 flex-1 flex flex-col justify-center text-left">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#caa15c]">
+                    {founder.role}
+                  </span>
+                  <h3 className="font-serif text-2xl lg:text-3xl text-[#1b3225] mt-1 font-medium">
+                    {founder.name}
+                  </h3>
+                  <p className="text-[9px] font-bold uppercase tracking-widest text-stone-400 mt-0.5">
+                    {founder.title}
+                  </p>
+                  <p className="mt-3 text-xs leading-relaxed text-stone-600 font-sans">
+                    {founder.description}
+                  </p>
+
+                  {/* Expertise Pill */}
+                  <div className="inline-flex items-center gap-2 rounded-full bg-[#faf6ee] border border-stone-200/50 px-4 py-1.5 mt-4 self-start text-[10px] font-semibold text-stone-700">
+                    <founder.expertiseIcon size={12} className="text-[#c5a059]" />
+                    <span>Expertise: {founder.expertise}</span>
+                  </div>
+                </div>
+
+                {/* Floating Top-Right Badge */}
+                <div className="absolute top-4 right-4 h-10 w-10 flex items-center justify-center rounded-full bg-[#faf6ee] border border-[#c5a059]/20 text-[#c5a059] shadow-sm z-10">
+                  <founder.floatingIcon size={16} strokeWidth={1.5} />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Right Column - Why Choose Parampara Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="rounded-[2.5rem] bg-[#1c2a21] p-8 text-[#faf6ee] shadow-sm flex flex-col justify-between"
+          >
+            <div>
+              {/* Header */}
+              <div className="flex flex-col items-start mb-6">
+                <Sparkles className="text-[#caa56c] mb-2" size={20} strokeWidth={1.5} />
+                <h3 className="font-serif text-2xl lg:text-3xl text-white font-medium tracking-wide">
+                  Why Clients Choose Parampara
+                </h3>
+                <div className="h-[2px] w-12 bg-[#caa56c] mt-2.5" />
               </div>
-              <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
-                <p className="text-3xl font-semibold text-white">Client-ready</p>
-                <p className="mt-2 text-sm leading-6 text-white/65">
-                  A premium portfolio experience built to win trust quickly.
-                </p>
+
+              {/* Feature List */}
+              <div className="flex flex-col gap-6">
+                {features.map((feature, i) => (
+                  <div key={i} className="flex gap-4 items-start pb-5 border-b border-white/5 last:border-0 last:pb-0">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/5 border border-white/10 text-[#caa56c]">
+                      <feature.icon size={20} strokeWidth={1.5} />
+                    </div>
+                    <div className="text-left">
+                      <h4 className="font-sans text-sm font-bold text-white tracking-wide">
+                        {feature.title}
+                      </h4>
+                      <p className="text-[11px] leading-relaxed text-white/70 mt-1">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          </motion.aside>
+
+            {/* Bottom Footer Row */}
+            {/* <div className="mt-8 pt-6 border-t border-white/10 grid grid-cols-2 gap-4 text-left">
+              <div className="flex gap-2.5 items-start">
+                <ShieldCheck className="text-[#caa56c] shrink-0 mt-0.5" size={18} strokeWidth={1.5} />
+                <div>
+                  <p className="text-[10px] font-bold uppercase text-[#caa56c] tracking-wider">
+                    Reliable. Transparent. Professional.
+                  </p>
+                  <p className="text-[9px] text-white/50 mt-0.5">
+                    That's the Parampara Promise.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-2.5 items-start">
+                <Heart className="text-[#caa56c] shrink-0 mt-0.5" size={18} strokeWidth={1.5} />
+                <div>
+                  <p className="text-[10px] font-bold uppercase text-[#caa56c] tracking-wider">
+                    Client-Ready Portfolio
+                  </p>
+                  <p className="text-[9px] text-white/50 mt-0.5">
+                    Proven experience. Trusted results.
+                  </p>
+                </div>
+              </div>
+            </div> */}
+          </motion.div>
+
         </div>
       </div>
     </section>

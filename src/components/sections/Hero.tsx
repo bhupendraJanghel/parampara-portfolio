@@ -1,112 +1,234 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronRight } from "lucide-react";
-import BalloonBackground from "@/components/ui/BalloonBackground";
+import {
+  Sparkles,
+  Calendar,
+  Crown,
+  PartyPopper,
+  Users,
+  Heart,
+  ArrowRight,
+} from "lucide-react";
 
-const stats = [
-  { value: "Weddings", label: "Luxury ceremonies and family celebrations" },
-  { value: "Decor", label: "Premium styling from concept to setup" },
-  { value: "Events", label: "Corporate, social, and cultural experiences" },
+const PHRASES = [
+  "Signature celebrations",
+  "Luxury weddings",
+  "Curated events",
+  "Exquisite experiences",
 ];
 
 export default function Hero() {
+  const [yearsOfExperience, setYearsOfExperience] = useState(6);
+  const [phraseIndex, setPhraseIndex] = useState(0);
+
+  useEffect(() => {
+    const startYear = 2022;
+    const currentYear = new Date().getFullYear();
+    setYearsOfExperience(currentYear - startYear);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setPhraseIndex((prev) => (prev + 1) % PHRASES.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const heroStats = [
+    {
+      value: `${yearsOfExperience}+`,
+      label: "YEARS OF EXPERIENCE",
+      icon: Crown,
+      circleBg: "bg-[#1c2a21]",
+      iconColor: "text-[#caa56c]",
+    },
+    {
+      value: "100+",
+      label: "EVENTS DELIVERED",
+      icon: PartyPopper,
+      circleBg: "bg-[#caa56c]/20",
+      iconColor: "text-[#9f7637]",
+    },
+    {
+      value: "100%",
+      label: "CLIENT SATISFACTION",
+      icon: Users,
+      circleBg: "bg-[#1c2a21]",
+      iconColor: "text-[#caa56c]",
+    },
+    {
+      value: "Trusted",
+      label: "BY FAMILIES & BUSINESSES",
+      icon: Heart,
+      circleBg: "bg-[#caa56c]/20",
+      iconColor: "text-[#9f7637]",
+    },
+  ];
+
   return (
-    <section className="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
-      {/* Background Layer */}
-      <div className="absolute inset-0 z-0">
+    <section className="relative w-full min-h-screen bg-[#faf6ee] flex flex-col justify-between pt-28 pb-12 overflow-hidden">
+
+      {/* Desktop background: spans the entire viewport width to place flowers on right and cream on left */}
+      <div className="absolute inset-0 z-0 hidden md:block">
         <Image
-          src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-          alt="Wedding Mandap Celebration"
+          src="/hero_background.png"
+          alt="Wedding centerpiece decor"
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-right"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.22),transparent_35%),linear-gradient(180deg,rgba(7,10,8,0.18),rgba(7,10,8,0.76))]" />
       </div>
 
-      {/* Main Content Layer */}
-      <div className="relative z-10 mx-auto grid max-w-7xl gap-12 px-6 pb-14 pt-28 text-white lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-        <div className="max-w-4xl">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="font-serif text-5xl leading-[1.02] tracking-[0.01em] drop-shadow-xl md:text-7xl lg:text-[5.8rem]"
-          >
-            Signature celebrations
-            <span className="block italic font-light text-[#f1dcc0]">
-              designed to feel unforgettable.
-            </span>
-          </motion.h1>
+      {/* Mobile background cover */}
+      <div className="absolute inset-0 z-0 block md:hidden">
+        <Image
+          src="/hero_background.png"
+          alt="Wedding centerpiece decor mobile"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-right opacity-30"
+        />
+      </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
-            className="mt-8 max-w-2xl text-lg leading-8 text-white/82 md:text-xl"
-          >
-            Parampara Events creates wedding celebrations, family functions,
-            and curated event experiences that look premium, run smoothly, and
-            leave a lasting impression on every guest.
-          </motion.p>
+      <div className="relative z-10 mx-auto max-w-7xl px-6 w-full flex-1 flex flex-col justify-between">
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.28, ease: "easeOut" }}
-            className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center font-sans uppercase tracking-[0.2em] text-xs"
-          >
-            <Link
-              href="#gallery"
-              className="group flex items-center justify-center gap-2 rounded-full border border-white/40 px-8 py-4 backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-stone-900"
-            >
-              View Portfolio
-              <ChevronRight size={14} className="transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link
-              href="#contact"
-              className="rounded-full bg-gradient-to-r from-[#caa15c] via-[#d9b26d] to-[#f1d6a0] px-8 py-4 font-semibold text-stone-900 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Book a Consultation
-            </Link>
-          </motion.div>
+        {/* Top Split Layout Row - vertically centered */}
+        <div className="flex-1 flex items-center w-full py-8">
+          <div className="grid gap-12 md:grid-cols-2 items-center w-full">
+
+            {/* Left Text Column */}
+            <div className="max-w-xl text-left">
+              {/* Tagline Badge */}
+              <div className="flex items-center gap-3 mb-6">
+                <span className="font-sans text-[10px] font-bold uppercase tracking-[0.25em] text-[#9f7637]">
+                  CRAFTING MOMENTS. CREATING MEMORIES.
+                </span>
+                <div className="h-[1px] bg-[#c5a059]/40 flex-grow max-w-[80px]" />
+                <Sparkles size={12} className="text-[#c5a059]" />
+              </div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 35 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[4.8rem] leading-[1.1] tracking-tight text-[#1b3225] font-medium"
+              >
+                <span className="block h-[1.25em] relative overflow-hidden mb-1 sm:mb-2">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={phraseIndex}
+                      initial={{ opacity: 0, y: 25 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -25 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      className="absolute left-0 right-0 top-0 block text-[#1b3225]"
+                    >
+                      {PHRASES[phraseIndex]}
+                    </motion.span>
+                  </AnimatePresence>
+                </span>
+                <span className="block mt-1 sm:mt-2">
+                  <span className="italic font-normal text-[#caa15c]">designed</span>{" "}
+                  to feel unforgettable.
+                </span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+                className="mt-6 text-sm sm:text-base leading-relaxed text-stone-600 font-sans"
+              >
+                Parampara Events creates wedding celebrations, family functions,
+                and curated event experiences that look premium, run smoothly, and
+                leave a lasting impression on every guest.
+              </motion.p>
+
+              {/* CTA Button Row */}
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.28, ease: "easeOut" }}
+                className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 text-xs font-bold uppercase tracking-widest"
+              >
+                <Link
+                  href="#gallery"
+                  className="group flex items-center justify-center gap-2 rounded-lg bg-[#111d15] px-8 py-4 text-white hover:bg-[#1b3225] transition-all"
+                >
+                  View Portfolio
+                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                </Link>
+
+                <Link
+                  href="#contact"
+                  className="flex items-center justify-center gap-2 rounded-lg border border-[#c5a059]/40 bg-white px-8 py-4 text-[#9f7637] hover:bg-stone-50 hover:border-[#c5a059] transition-all"
+                >
+                  <Calendar size={14} className="text-[#c5a059]" />
+                  Book a Consultation
+                </Link>
+              </motion.div>
+            </div>
+
+            {/* Right Placeholder Column (empty space on desktop since background image covers it) */}
+            <div className="hidden md:block" />
+          </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.35, ease: "easeOut" }}
-          className="grid gap-4 rounded-[2rem] border border-white/12 bg-white/10 p-6 backdrop-blur-xl lg:ml-auto lg:max-w-md"
-        >
-          {stats.map((item) => (
-            <div
-              key={item.value}
-              className="rounded-[1.4rem] border border-white/10 bg-black/10 p-5 transition-transform duration-300 hover:-translate-y-1"
-            >
-              <p className="font-serif text-3xl text-[#f6dfb5]">{item.value}</p>
-              <p className="mt-2 text-sm leading-6 text-white/72">{item.label}</p>
+        {/* Bottom Section */}
+        <div className="w-full mt-auto pt-6">
+          {/* Floating Stat Bar Card at the Bottom */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.4, ease: "easeOut" }}
+            className="rounded-[2.5rem] bg-white border border-stone-200/50 p-6 md:p-8 shadow-[0_15px_50px_rgba(27,50,37,0.04)] max-w-6xl mx-auto"
+          >
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 md:gap-y-0 justify-items-center">
+              {heroStats.map((stat, i) => (
+                <div
+                  key={i}
+                  className={`flex items-center gap-4 text-left w-full justify-start md:justify-center px-4 md:px-6
+                    ${i > 0 && i % 2 !== 0 ? "border-l border-stone-100" : ""}
+                    ${i >= 2 ? "border-t border-stone-100 md:border-t-0" : ""}
+                    ${i > 0 ? "md:border-l md:border-stone-100 md:border-t-0" : ""}
+                  `}
+                >
+                  <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${stat.circleBg} ${stat.iconColor} shadow-sm`}>
+                    <stat.icon size={18} strokeWidth={1.5} />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-serif text-lg sm:text-2xl font-bold text-[#1b3225] leading-tight">
+                      {stat.value}
+                    </span>
+                    <span className="font-sans text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-stone-500 mt-0.5 leading-normal">
+                      {stat.label}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </motion.div>
-      </div>
+          </motion.div>
 
-      {/* Helium Balloons Foreground Layer */}
-      <div className="absolute inset-0 z-20 pointer-events-none">
-        <BalloonBackground
-          count={20}
-          risingSpeed={0.2}
-          maxVelocity={0.08}
-          minSize={0.6}
-          maxSize={1.2}
-          colors={[
-            '#e0115f', '#0047ab', '#ffcf00', '#ff00ff',
-            '#00ced1', '#9370db', '#ff4500', '#2e8b57'
-          ]}
-        />
+          {/* Stat Bar Bottom Caption & Ornament */}
+          <div className="mt-8 flex flex-col items-center justify-center text-center">
+            <div className="flex items-center justify-center gap-3 w-full max-w-[100px] mb-3">
+              <div className="h-[1px] bg-stone-200 flex-grow" />
+              <Sparkles size={10} className="text-[#c5a059]" />
+              <div className="h-[1px] bg-stone-200 flex-grow" />
+            </div>
+            <p className="font-sans text-[10px] font-bold uppercase tracking-[0.25em] text-stone-500 leading-relaxed">
+              Trusted by families, businesses, and communities across{" "}
+              <span className="text-[#9f7637] font-bold">Chhattisgarh</span>.
+            </p>
+          </div>
+        </div>
+
       </div>
     </section>
   );
