@@ -25,7 +25,7 @@ const elements = [
 
 export default function Services() {
   return (
-    <section className="bg-[#fbf8f1] px-6 pt-24 pb-12">
+    <section className="bg-[#fbf8f1] px-6 py-12 md:py-16">
       <div className="mx-auto max-w-7xl text-center">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}

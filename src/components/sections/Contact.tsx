@@ -2,14 +2,29 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import Image from "next/image";
+import {
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  User,
+  Calendar,
+  CalendarCheck,
+  ArrowRight,
+  ChevronDown,
+  ShieldCheck,
+  Headset
+} from "lucide-react";
+import { CONTACT_INFO, SOCIALS } from "@/lib/constants";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    eventType: "Wedding",
+    eventType: "",
     eventDate: "",
+    location: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,6 +68,7 @@ export default function Contact() {
           Phone: formData.phone,
           "Event Type": formData.eventType,
           "Event Date": formData.eventDate,
+          "Event Location": formData.location,
           Message: formData.message,
         }),
       });
@@ -67,8 +83,9 @@ export default function Contact() {
       setFormData({
         name: "",
         phone: "",
-        eventType: "Wedding",
+        eventType: "",
         eventDate: "",
+        location: "",
         message: "",
       });
     } catch (error) {
@@ -83,158 +100,307 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-gradient-to-br from-[#2c4b37] to-[#1b3225] px-6 py-24 text-white"
+      className="relative overflow-hidden bg-[#070d09] px-4 py-16 md:py-24 text-white"
     >
-      <div className="absolute top-0 right-0 h-[600px] w-[600px] rounded-full bg-[#c5a059] opacity-10 blur-[150px]" />
+      {/* Background glowing circle */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-[#c5a059] opacity-[0.03] blur-[150px] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 gap-16 lg:grid-cols-2">
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col justify-center"
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="rounded-[2.5rem] border border-white/10 bg-[#0e1b12]/95 p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12"
         >
-          <span className="mb-4 block text-xs font-bold uppercase tracking-[0.2em] text-[#d4af37]">
-            Start Your Consultation
-          </span>
-          <h2 className="mb-8 font-serif text-5xl leading-tight text-[#fbf8f1] md:text-6xl">
-            Let&apos;s design
-            <br /> your next event
-          </h2>
-          <p className="mb-12 max-w-md font-light leading-relaxed text-white/80">
-            Whether you are planning a wedding, a family celebration, or a
-            branded event, Parampara Events can help shape the concept, decor,
-            guest experience, and execution.
-          </p>
+          {/* Left Column: Brand Info */}
+          <div className="lg:col-span-5 flex flex-col justify-around h-full pr-0 lg:pr-4 text-left">
+            <div>
+              {/* Title */}
+              <h2 className="mb-6 font-serif text-4xl md:text-5xl leading-[1.15] text-[#fbf8f1] font-medium tracking-tight">
+                Let&apos;s Create
+                <br /> Something
+                <br />
+                <span className="font-signature text-5xl md:text-6xl text-[#caa56c] font-normal block mt-2 tracking-wide leading-none">
+                  Extraordinary
+                </span>
+              </h2>
 
-          <div className="mb-12 space-y-6 font-light opacity-90">
-            <div className="flex items-center gap-4">
-              <Phone className="text-[#d4af37]" size={20} />
-              <span>Contact number available on request</span>
+              {/* Description */}
+              <p className="max-w-sm font-sans text-stone-300 text-xs sm:text-sm font-light leading-relaxed">
+                Share your vision with us and we&apos;ll turn your dream event into unforgettable memories.
+              </p>
             </div>
-            <div className="flex items-center gap-4">
-              <Mail className="text-[#d4af37]" size={20} />
-              <span>Instagram and direct inquiry support</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <MapPin className="text-[#d4af37]" size={20} />
-              <span>Available for weddings, decor work, and event setups</span>
+
+            {/* Contacts details list */}
+            <div className="space-y-4 font-sans text-xs sm:text-sm font-light mt-8 lg:mt-0">
+              {/* Phone - Events */}
+              <div className="flex items-center gap-4 group">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#caa56c]/40 bg-[#caa56c]/5 text-[#caa56c] shrink-0 transition-all group-hover:bg-[#caa56c]/10">
+                  <Phone size={16} />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[9px] text-stone-400 font-semibold tracking-wider uppercase leading-none mb-1">
+                    Events Inquiry (Rumesh)
+                  </span>
+                  <a
+                    href={`tel:${CONTACT_INFO.events.phone}`}
+                    className="text-stone-200 hover:text-[#caa56c] transition-colors font-medium text-xs sm:text-sm"
+                  >
+                    {CONTACT_INFO.events.phone}
+                  </a>
+                </div>
+              </div>
+
+              {/* Phone - Decor */}
+              <div className="flex items-center gap-4 group">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#caa56c]/40 bg-[#caa56c]/5 text-[#caa56c] shrink-0 transition-all group-hover:bg-[#caa56c]/10">
+                  <Phone size={16} />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[9px] text-stone-400 font-semibold tracking-wider uppercase leading-none mb-1">
+                    Decor Shop (Nitesh)
+                  </span>
+                  <a
+                    href={`tel:${CONTACT_INFO.decor.phone}`}
+                    className="text-stone-200 hover:text-[#caa56c] transition-colors font-medium text-xs sm:text-sm"
+                  >
+                    {CONTACT_INFO.decor.phone}
+                  </a>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-center gap-4 group">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#caa56c]/40 bg-[#caa56c]/5 text-[#caa56c] shrink-0 transition-all group-hover:bg-[#caa56c]/10">
+                  <Mail size={16} />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[9px] text-stone-400 font-semibold tracking-wider uppercase leading-none mb-1">
+                    Email Us
+                  </span>
+                  <a
+                    href={`mailto:${CONTACT_INFO.events.email}`}
+                    className="text-stone-200 hover:text-[#caa56c] transition-colors font-medium text-xs sm:text-sm break-all"
+                  >
+                    {CONTACT_INFO.events.email}
+                  </a>
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="flex items-center gap-4 group">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#caa56c]/40 bg-[#caa56c]/5 text-[#caa56c] shrink-0 transition-all group-hover:bg-[#caa56c]/10">
+                  <MapPin size={16} />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[9px] text-stone-400 font-semibold tracking-wider uppercase leading-none mb-1">
+                    Office Location
+                  </span>
+                  <a
+                    href={SOCIALS.googleMaps}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-stone-200 hover:text-[#caa56c] transition-colors font-medium text-xs sm:text-sm leading-snug"
+                  >
+                    Awanti Bai Chowk, Kurud Rd, Kohka, Bhilai, CG
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
-          <a
-            href="#instagram"
-            className="flex w-max items-center justify-center gap-2 rounded-full bg-[#25D366] px-8 py-4 font-bold text-white shadow-lg shadow-[#25D366]/20 transition-transform hover:-translate-y-1"
-          >
-            <Send size={18} /> Connect With Parampara
-          </a>
-        </motion.div>
+          {/* Divider */}
+          <div className="hidden lg:flex col-span-1 justify-center items-center h-full">
+            <div className="h-[90%] w-[1px] bg-gradient-to-b from-transparent via-[#caa56c]/20 to-transparent relative">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rotate-45 bg-[#caa56c] border border-[#0e1b12]" />
+            </div>
+          </div>
+          <div className="block lg:hidden my-4 h-[1px] bg-gradient-to-r from-transparent via-[#caa56c]/15 to-transparent" />
 
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="rounded-[2rem] border border-white/20 bg-white/10 p-8 backdrop-blur-xl md:p-12 min-h-[500px] flex flex-col justify-center"
-        >
-          {isSubmitted ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="flex flex-col items-center justify-center text-center py-8"
-            >
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#d4af37]/20 text-[#d4af37]">
-                <Send size={24} />
+          {/* Right Column: Form */}
+          <div className="lg:col-span-6 flex flex-col justify-between h-full">
+            {isSubmitted ? (
+              <div className="flex flex-col items-center justify-center text-center py-20 h-full">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#caa56c]/10 border border-[#caa56c]/30 text-[#caa56c]">
+                  <Send size={24} />
+                </div>
+                <h3 className="mb-3 font-serif text-2xl text-[#fbf8f1]">Inquiry Received!</h3>
+                <p className="max-w-xs text-xs sm:text-sm leading-relaxed text-stone-300">
+                  Thank you for reaching out to Parampara Events. We have received your details and will get in touch with you shortly.
+                </p>
+                <button
+                  onClick={() => setIsSubmitted(false)}
+                  className="mt-8 text-xs font-bold uppercase tracking-widest text-[#caa56c] underline hover:text-[#f1d6a0] transition-colors"
+                >
+                  Send another message
+                </button>
               </div>
-              <h3 className="mb-3 font-serif text-2xl text-[#fbf8f1]">Inquiry Received!</h3>
-              <p className="max-w-xs text-sm leading-relaxed text-white/70">
-                Thank you for reaching out to Parampara Events. We have received your details and will get in touch with you shortly.
-              </p>
-              <button
-                onClick={() => setIsSubmitted(false)}
-                className="mt-8 text-xs font-bold uppercase tracking-widest text-[#d4af37] underline hover:text-[#f1d6a0] transition-colors"
-              >
-                Send another message
-              </button>
-            </motion.div>
-          ) : (
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-[#d4af37]">Full Name</label>
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                  className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/30 transition-colors focus:border-[#d4af37] focus:outline-none"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-[#d4af37]">Phone Number</label>
-                <input
-                  type="tel"
-                  placeholder="+91"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  required
-                  className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/30 transition-colors focus:border-[#d4af37] focus:outline-none"
-                />
-              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5 flex flex-col justify-between h-full">
+                <div className="space-y-4">
+                  {/* Row 1: Full Name & Phone Number */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Full Name */}
+                    <div className="space-y-1.5 flex flex-col text-left">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-[#caa56c]">Full Name</label>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          placeholder="Your Name"
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          required
+                          className="w-full rounded-xl border border-white/5 bg-[#0a120c]/85 pl-4 pr-10 py-3 text-xs text-white placeholder-white/20 transition-all focus:border-[#caa56c]/60 focus:outline-none focus:ring-1 focus:ring-[#caa56c]/60"
+                        />
+                        <User size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-500" />
+                      </div>
+                    </div>
 
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-[#d4af37]">Event Type</label>
-                <div className="relative">
-                  <select
-                    value={formData.eventType}
-                    onChange={(e) => setFormData({ ...formData, eventType: e.target.value })}
-                    className="w-full appearance-none rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white/70 transition-colors focus:border-[#d4af37] focus:outline-none"
-                  >
-                    <option className="bg-[#1b3225]">Wedding</option>
-                    <option className="bg-[#1b3225]">Corporate</option>
-                    <option className="bg-[#1b3225]">Birthday</option>
-                  </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white/50">
-                    ▼
+                    {/* Phone Number */}
+                    <div className="space-y-1.5 flex flex-col text-left">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-[#caa56c]">Phone Number</label>
+                      <div className="relative">
+                        <input
+                          type="tel"
+                          placeholder="+91 XXXX XXXXX"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          required
+                          className="w-full rounded-xl border border-white/5 bg-[#0a120c]/85 pl-4 pr-10 py-3 text-xs text-white placeholder-white/20 transition-all focus:border-[#caa56c]/60 focus:outline-none focus:ring-1 focus:ring-[#caa56c]/60"
+                        />
+                        <Phone size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-500" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Row 2: Event Type & Event Date */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Event Type */}
+                    <div className="space-y-1.5 flex flex-col text-left">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-[#caa56c]">Event Type</label>
+                      <div className="relative">
+                        <select
+                          value={formData.eventType}
+                          onChange={(e) => setFormData({ ...formData, eventType: e.target.value })}
+                          required
+                          className={`w-full appearance-none rounded-xl border border-white/5 bg-[#0a120c]/85 pl-4 pr-10 py-3 text-xs transition-all focus:border-[#caa56c]/60 focus:outline-none focus:ring-1 focus:ring-[#caa56c]/60 ${formData.eventType !== "" ? "text-white" : "text-white/20"
+                            }`}
+                        >
+                          <option value="" disabled className="bg-[#0e1b12] text-stone-500">Select Event Type</option>
+                          <option value="Wedding" className="bg-[#0e1b12] text-white">Wedding</option>
+                          <option value="Anniversary" className="bg-[#0e1b12] text-white">Anniversary</option>
+                          <option value="Birthday" className="bg-[#0e1b12] text-white">Birthday</option>
+                          <option value="Anniversary" className="bg-[#0e1b12] text-white">Baby Shower</option>
+                          <option value="Anniversary" className="bg-[#0e1b12] text-white">Home Decoration</option>
+                          <option value="Anniversary" className="bg-[#0e1b12] text-white">Balloon Decoration</option>
+                          <option value="Corporate" className="bg-[#0e1b12] text-white">Corporate Events</option>
+                          <option value="Anniversary" className="bg-[#0e1b12] text-white">Other</option>
+
+                        </select>
+                        <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-500 pointer-events-none" />
+                      </div>
+                    </div>
+
+                    {/* Event Date */}
+                    <div className="space-y-1.5 flex flex-col text-left">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-[#caa56c]">Event Date</label>
+                      <div className="relative">
+                        <input
+                          type="date"
+                          value={formData.eventDate}
+                          onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
+                          required
+                          className={`w-full rounded-xl border border-white/5 bg-[#0a120c]/85 pl-4 pr-10 py-3 text-xs transition-all focus:border-[#caa56c]/60 focus:outline-none focus:ring-1 focus:ring-[#caa56c]/60 custom-date-input ${formData.eventDate !== "" ? "text-white" : "text-white/20"
+                            }`}
+                          style={{ colorScheme: "dark" }}
+                        />
+                        <Calendar size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-500 pointer-events-none" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Row 3: Event Location */}
+                  <div className="space-y-1.5 flex flex-col text-left">
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-[#caa56c]">Event Location</label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Enter Location"
+                        value={formData.location}
+                        onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                        required
+                        className="w-full rounded-xl border border-white/5 bg-[#0a120c]/85 pl-4 pr-10 py-3 text-xs text-white placeholder-white/20 transition-all focus:border-[#caa56c]/60 focus:outline-none focus:ring-1 focus:ring-[#caa56c]/60"
+                      />
+                      <MapPin size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-500" />
+                    </div>
+                  </div>
+
+                  {/* Row 4: Message */}
+                  <div className="space-y-1.5 flex flex-col text-left">
+                    <label className="text-[10px] font-bold uppercase tracking-wider text-[#caa56c]">Tell Us About Your Event</label>
+                    <div className="relative">
+                      <textarea
+                        placeholder="Share your ideas, preferences, guest count, theme, or anything we should know..."
+                        rows={3}
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        className="w-full resize-none rounded-xl border border-white/5 bg-[#0a120c]/85 pl-4 pr-4 py-3 text-xs text-white placeholder-white/20 transition-all focus:border-[#caa56c]/60 focus:outline-none focus:ring-1 focus:ring-[#caa56c]/60 min-h-[90px]"
+                      ></textarea>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-[#d4af37]">Event Date</label>
-                <input
-                  type="date"
-                  value={formData.eventDate}
-                  onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
-                  required
-                  className="w-full appearance-none rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white/70 transition-colors focus:border-[#d4af37] focus:outline-none"
-                  style={{ colorScheme: "dark" }}
-                />
-              </div>
 
-              <div className="space-y-2 sm:col-span-2">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-[#d4af37]">Message</label>
-                <textarea
-                  placeholder="Tell us about your dream event..."
-                  rows={4}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required
-                  className="w-full resize-none rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/30 transition-colors focus:border-[#d4af37] focus:outline-none"
-                ></textarea>
-              </div>
+                {/* Row 5: Submit Button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-between rounded-xl bg-gradient-to-r from-[#caa56c] via-[#b49257] to-[#a08046] px-6 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#0a120c] shadow-lg hover:shadow-xl hover:shadow-[#caa56c]/10 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-4"
+                >
+                  <div className="flex items-center gap-3">
+                    <CalendarCheck size={18} className="text-[#0a120c]" />
+                    <span>{isSubmitting ? "Sending..." : "Request Free Consultation"}</span>
+                  </div>
+                  <ArrowRight size={18} className="text-[#0a120c]" />
+                </button>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="mt-4 w-full rounded-xl bg-gradient-to-r from-[#d4af37] to-[#c5a059] p-4 text-sm font-bold uppercase tracking-widest text-[#1b3225] transition-all hover:shadow-lg hover:shadow-[#c5a059]/30 active:scale-[0.98] sm:col-span-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? "Sending..." : "Request Consultation"}
-              </button>
-            </form>
-          )}
+                {/* Row 6: Trust Badges Footer */}
+                <div className="pt-6 border-t border-white/5 mt-6">
+                  <div className="grid grid-cols-3 gap-1">
+                    {/* Badge 1 */}
+                    <div className="flex items-center justify-center gap-2 text-left">
+                      <ShieldCheck className="text-[#caa56c] shrink-0" size={24} strokeWidth={1.5} />
+                      <div className="flex flex-col">
+                        <span className="font-serif text-xs font-bold text-[#caa56c] leading-tight">500+</span>
+                        <span className="text-[8px] sm:text-[9px] text-stone-400 leading-tight">Events Delivered</span>
+                      </div>
+                    </div>
+
+                    {/* Badge 2 */}
+                    <div className="flex items-center justify-center gap-2 text-left border-x border-white/5 px-2">
+                      <MapPin className="text-[#caa56c] shrink-0" size={24} strokeWidth={1.5} />
+                      <div className="flex flex-col">
+                        <span className="font-serif text-xs font-bold text-[#caa56c] leading-tight">Across</span>
+                        <span className="text-[8px] sm:text-[9px] text-stone-400 leading-tight">Chhattisgarh</span>
+                      </div>
+                    </div>
+
+                    {/* Badge 3 */}
+                    <div className="flex items-center justify-center gap-2 text-left">
+                      <Headset className="text-[#caa56c] shrink-0" size={24} strokeWidth={1.5} />
+                      <div className="flex flex-col">
+                        <span className="font-serif text-xs font-bold text-[#caa56c] leading-tight">Free</span>
+                        <span className="text-[8px] sm:text-[9px] text-stone-400 leading-tight">Initial Consultation</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            )}
+          </div>
         </motion.div>
       </div>
     </section>
   );
 }
+

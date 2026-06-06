@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { Baby, Building2, Cake, ChevronRight, Flame } from "lucide-react";
 
 const milestones = [
@@ -11,24 +12,28 @@ const milestones = [
     description: "Launches, award nights, annual meets, and branded gatherings with polished staging and smooth execution.",
     icon: Building2,
     imageUrl: "/Other/corporate_1.png",
+    category: "corporate",
   },
   {
     title: "Grand Birthdays",
     description: "Custom themes, decor styling, and guest-friendly layouts for milestone birthdays and family celebrations.",
     icon: Cake,
     imageUrl: "/Birthday/birthday_1.png",
+    category: "birthdays",
   },
   {
     title: "Religious Functions",
     description: "Tasteful arrangements for pujas, spiritual gatherings, and ceremonies that need cultural sensitivity and warmth.",
     icon: Flame,
     imageUrl: "/Other/religious_1.png",
+    category: "corporate",
   },
   {
     title: "Baby Occasions",
     description: "Soft styling, thoughtful decor details, and comfortable setups for baby showers and naming ceremonies.",
     icon: Baby,
     imageUrl: "/Other/baby_occasion_1.png",
+    category: "corporate",
   },
 ];
 
@@ -79,8 +84,8 @@ export default function ExtraEvents() {
   const isCardActive = (idx: number) => activeCardIndex === idx;
 
   return (
-    <section id="events" className="bg-[#fcf8ef] px-6 py-10">
-      <div className="mx-auto max-w-6xl">
+    <section id="events" className="bg-[#fcf8ef] px-6 py-12 md:py-16">
+      <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -104,52 +109,54 @@ export default function ExtraEvents() {
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5">
           {milestones.map((item, index) => (
-            <motion.div
+            <Link
+              href={`/gallery?category=${item.category}&from=events`}
               key={item.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-20px" }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`extra-event-card group relative flex flex-col overflow-hidden rounded-[1.25rem] border bg-white shadow-[0_18px_50px_rgba(36,38,27,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(36,38,27,0.12)] cursor-pointer ${isCardActive(index) ? "scale-[0.99] border-[#d4af37]/90 shadow-md" : "border-[#d4af37]/25"
-                }`}
-              whileTap={{ scale: 0.98 }}
+              className="block w-full"
             >
-              {/* Image Section */}
-              <div className="relative h-40 w-full sm:h-48">
-                <Image
-                  src={item.imageUrl}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className={`object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105 group-active:scale-105 ${isCardActive(index) ? "scale-105" : ""
-                    }`}
-                />
-                {/* Fade to white at bottom */}
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none" />
-              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-20px" }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className={`extra-event-card group relative flex flex-col overflow-hidden rounded-[1.25rem] border bg-white shadow-[0_18px_50px_rgba(36,38,27,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_60px_rgba(36,38,27,0.12)] cursor-pointer h-full ${isCardActive(index) ? "scale-[0.99] border-[#d4af37]/90 shadow-md" : "border-[#d4af37]/25"
+                  }`}
+                whileTap={{ scale: 0.98 }}
+              >
+                {/* Image Section */}
+                <div className="relative h-40 w-full sm:h-48">
+                  <Image
+                    src={item.imageUrl}
+                    alt={item.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className={`object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105 group-active:scale-105 ${isCardActive(index) ? "scale-105" : ""
+                      }`}
+                  />
+                  {/* Fade to white at bottom */}
+                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+                </div>
 
-              {/* Floating Icon */}
-              <div className={`absolute left-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-[#c5a059] shadow-sm backdrop-blur-md transition-colors duration-300 group-hover:bg-[#c5a059] group-hover:text-white z-10 ${isCardActive(index) ? "bg-[#c5a059] text-white" : ""
-                }`}>
-                <item.icon strokeWidth={1.5} size={18} />
-              </div>
+                {/* Floating Icon */}
+                <div className={`absolute left-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-[#c5a059] shadow-sm backdrop-blur-md transition-colors duration-300 group-hover:bg-[#c5a059] group-hover:text-white z-10 ${isCardActive(index) ? "bg-[#c5a059] text-white" : ""
+                  }`}>
+                  <item.icon strokeWidth={1.5} size={18} />
+                </div>
 
-              {/* Text Section */}
-              <div className="relative z-10 flex flex-grow flex-col bg-white px-5 pb-5 pt-0">
-                <h3 className="mb-1.5 font-serif text-lg text-[#1b3225]">
-                  {item.title}
-                </h3>
-                <p className="mb-3 flex-grow text-xs font-light leading-5 text-stone-500 line-clamp-2">
-                  {item.description}
-                </p>
-                <a
-                  href="#contact"
-                  className="flex w-max items-center gap-1 text-[9px] font-bold uppercase tracking-widest text-[#c5a059] transition-colors group-hover:text-[#1b3225]"
-                >
-                  Ask for Concepts <ChevronRight size={12} className="transition-transform group-hover:translate-x-1" />
-                </a>
-              </div>
-            </motion.div>
+                {/* Text Section */}
+                <div className="relative z-10 flex flex-grow flex-col bg-white px-5 pb-5 pt-0">
+                  <h3 className="mb-1.5 font-serif text-lg text-[#1b3225]">
+                    {item.title}
+                  </h3>
+                  <p className="mb-3 flex-grow text-xs font-light leading-5 text-stone-500 line-clamp-2">
+                    {item.description}
+                  </p>
+                  <span className="flex w-max items-center gap-1 text-[9px] font-bold uppercase tracking-widest text-[#c5a059] transition-colors group-hover:text-[#1b3225]">
+                    View Gallery <ChevronRight size={12} className="transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>

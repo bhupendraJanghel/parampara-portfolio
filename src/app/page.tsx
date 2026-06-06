@@ -20,8 +20,8 @@ export default function Home() {
         <ExtraEvents />
         <Gallery />
         <Services />
-        <GoogleReviews />
         <Instagram />
+        <GoogleReviews />
         <About />
         <Contact />
         <Footer />

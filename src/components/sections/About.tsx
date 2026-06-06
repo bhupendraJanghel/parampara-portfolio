@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { getYearsOfExperience } from "@/lib/constants";
 import {
   Crown,
   Sparkles,
@@ -17,6 +18,8 @@ import {
   Heart,
   Bell,
   Store,
+  Monitor,
+  Laptop,
 } from "lucide-react";
 
 
@@ -25,24 +28,35 @@ const founders = [
   {
     name: "Rumesh Janghel",
     role: "FOUNDER",
-    title: "PARAMPARA EVENT PLANNER",
+    title: "PARAMPARA EVENT PLANNERS",
     description:
       "Leads event planning, coordination, and client experience with a focus on creating seamless and meaningful celebrations.",
     expertise: "Planning & Coordination",
     expertiseIcon: Compass,
     floatingIcon: Crown,
-    image: "/images/rumesh.png",
+    image: "/team/rumesh.png",
   },
   {
     name: "Nitesh Janghel",
     role: "CO-FOUNDER",
-    title: "OWNER OF PARAMPARA DECOR SHOP",
+    title: "CHIEF OF PARAMPARA DECOR STUDIO",
     description:
       "Heads decor design, styling, and event setup execution with an eye for detail and premium finishes.",
     expertise: "Decor & Styling",
     expertiseIcon: Palette,
     floatingIcon: Store,
-    image: "/images/nitesh.png",
+    image: "/team/nitesh.png",
+  },
+  {
+    name: "Bhupendra Janghel",
+    role: "HEAD OF DIGITAL & TECHNOLOGY",
+    title: "DIGITAL & TECHNOLOGY LEAD",
+    description:
+      "Manages our website, web apps, digital platforms, and social media presence to keep Parampara connected and always evolving.",
+    expertise: "Web, Digital & Technology",
+    expertiseIcon: Laptop,
+    floatingIcon: Monitor,
+    image: "/team/bhuppi.png",
   },
 ];
 
@@ -67,39 +81,23 @@ const features = [
     description: "One dedicated team handling everything so you can relax and enjoy.",
     icon: Handshake,
   },
+  {
+    title: "Tailored Concept Styling",
+    description: "Custom color palettes, visual mockups, and layouts curated for your specific theme.",
+    icon: Palette,
+  },
+  {
+    title: "Transparent Pricing & Operations",
+    description: "Direct communications, clear cost sheets, and highly organized timelines for complete peace of mind.",
+    icon: ShieldCheck,
+  },
 ];
 
 export default function About() {
-  const [yearsOfExperience, setYearsOfExperience] = useState(6);
-
-  useEffect(() => {
-    const startYear = 2022;
-    const currentYear = new Date().getFullYear();
-    setYearsOfExperience(currentYear - startYear);
-  }, []);
-
-  const stats = [
-    {
-      value: `${yearsOfExperience}+ Years`,
-      label: "EXPERIENCE",
-      icon: Award,
-    },
-    {
-      value: "100+",
-      label: "EVENTS DELIVERED",
-      icon: Sparkles,
-    },
-    {
-      value: "Trusted",
-      label: "BY FAMILIES & BUSINESSES",
-      icon: Users,
-    },
-  ];
-
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-[#faf6ee] px-6 py-24 text-[#1b3225]"
+      className="relative overflow-hidden bg-[#faf6ee] px-6 py-12 md:py-16 text-[#1b3225]"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b88a44]/35 to-transparent" />
 
@@ -129,32 +127,6 @@ export default function About() {
             </div>
             <div className="h-[1px] bg-gradient-to-l from-transparent to-[#c5a059]/40 flex-grow" />
           </div>
-        </div>
-
-        {/* Statistics & Trust Bar */}
-        <div className="mx-auto max-w-4xl text-center mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-3xl mx-auto">
-            {stats.map((stat, i) => (
-              <div key={i} className="flex items-center gap-4 text-left justify-start md:justify-center">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#fbf8f1] border border-stone-200/60 text-[#c5a059] shadow-sm">
-                  <stat.icon size={22} strokeWidth={1.5} />
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-serif text-base sm:text-lg font-bold text-[#1b3225] leading-tight">
-                    {stat.value}
-                  </span>
-                  <span className="font-sans text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-stone-500 mt-0.5">
-                    {stat.label}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-xs sm:text-sm text-stone-600 mt-8 font-medium">
-            Trusted by families, businesses, and communities across{" "}
-            <span className="font-bold text-[#1b3225]">Chhattisgarh</span>.
-          </p>
         </div>
 
         {/* 2-Column Main Layout Grid */}

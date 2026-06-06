@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { SOCIALS } from "@/lib/constants";
 import {
   Heart,
   MessageCircle,
@@ -20,15 +21,15 @@ interface InstagramPost {
 }
 
 const InstagramLogo = () => (
-  <svg 
-    width="18" 
-    height="18" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className="text-white"
   >
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -193,13 +194,15 @@ export default function InstagramFeed() {
   }, [isLoading, posts]);
 
   return (
-    <section className="bg-[#fbf8f1] px-6 pb-24 pt-12">
-      <div className="mx-auto max-w-7xl border-t border-stone-200/50 pt-16 text-center">
+    <section className="bg-[#fbf8f1] px-6 pb-12 md:pb-16 pt-0">
+      <div className="mx-auto max-w-7xl border-t border-stone-200/50 pt-12 md:pt-16 text-center">
         <div className="flex flex-col items-center text-center">
-          {/* Instagram Badge */}
-          <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-sm">
-            <InstagramLogo /> @paramparaevents
-          </span>
+          {/* Instagram Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-sm">
+              <InstagramLogo /> {SOCIALS.instagramEventsUsername}
+            </span>
+          </div>
 
           {/* Title & Separator */}
           <h3 className="mb-2 mt-4 font-serif text-3xl text-[#1b3225] md:text-4xl">
@@ -301,34 +304,6 @@ export default function InstagramFeed() {
           {/* Left and Right Fade Overlays */}
           <div className="absolute left-0 top-0 bottom-0 w-32 sm:w-64 bg-gradient-to-r from-[#fbf8f1] to-[#fbf8f1]/0 z-20 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-32 sm:w-64 bg-gradient-to-l from-[#fbf8f1] to-[#fbf8f1]/0 z-20 pointer-events-none" />
-        </div>
-
-        {/* Action Row - Follow on Instagram */}
-        <div className="mt-12 flex flex-col items-center justify-center gap-3">
-          <a
-            href="https://instagram.com/paramparaevents"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-full border border-stone-200 bg-white px-8 py-3.5 font-sans text-xs font-semibold text-[#1b3225] shadow-sm transition-all hover:bg-stone-50 hover:border-[#c5a059]"
-          >
-            {/* Custom SVG Instagram Icon to match brand */}
-            <svg 
-              width="14" 
-              height="14" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              className="text-[#c5a059]"
-            >
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-            Follow @paramparaevents on Instagram <ChevronRight size={14} className="ml-1" />
-          </a>
         </div>
       </div>
     </section>

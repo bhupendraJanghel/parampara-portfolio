@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { getYearsOfExperience, OPERATIONAL_REGION } from "@/lib/constants";
 import {
   Sparkles,
   Calendar,
@@ -26,9 +27,7 @@ export default function Hero() {
   const [phraseIndex, setPhraseIndex] = useState(0);
 
   useEffect(() => {
-    const startYear = 2022;
-    const currentYear = new Date().getFullYear();
-    setYearsOfExperience(currentYear - startYear);
+    setYearsOfExperience(getYearsOfExperience());
   }, []);
 
   useEffect(() => {
@@ -47,7 +46,7 @@ export default function Hero() {
       iconColor: "text-[#caa56c]",
     },
     {
-      value: "100+",
+      value: "500+",
       label: "EVENTS DELIVERED",
       icon: PartyPopper,
       circleBg: "bg-[#caa56c]/20",
@@ -70,7 +69,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative w-full min-h-screen bg-[#faf6ee] flex flex-col justify-between pt-28 pb-12 overflow-hidden">
+    <section className="relative w-full min-h-screen bg-[#faf6ee] flex flex-col justify-between pt-28 pb-12 md:pb-16 overflow-hidden">
 
       {/* Desktop background: spans the entire viewport width to place flowers on right and cream on left */}
       <div className="absolute inset-0 z-0 hidden md:block">
@@ -161,7 +160,7 @@ export default function Hero() {
                   href="#gallery"
                   className="group flex items-center justify-center gap-2 rounded-lg bg-[#111d15] px-8 py-4 text-white hover:bg-[#1b3225] transition-all"
                 >
-                  View Portfolio
+                  View Gallery
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </Link>
 
@@ -222,9 +221,9 @@ export default function Hero() {
               <Sparkles size={10} className="text-[#c5a059]" />
               <div className="h-[1px] bg-stone-200 flex-grow" />
             </div>
-            <p className="font-sans text-[10px] font-bold uppercase tracking-[0.25em] text-stone-500 leading-relaxed">
+            <p className="text-xs sm:text-sm text-stone-600 mt-2 font-medium">
               Trusted by families, businesses, and communities across{" "}
-              <span className="text-[#9f7637] font-bold">Chhattisgarh</span>.
+              <span className="font-bold text-[#1b3225]">{OPERATIONAL_REGION}</span>.
             </p>
           </div>
         </div>
