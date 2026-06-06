@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import CelebrationCanvas from "@/components/ui/CelebrationCanvas";
 import "./globals.css";
 
 const inter = Inter({
@@ -29,6 +30,7 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable} scroll-smooth antialiased`}
     >
       <body className="font-sans text-stone-800 bg-[#fbf8f1] flex flex-col min-h-screen">
+        <CelebrationCanvas />
         {children}
         <Analytics />
       </body>

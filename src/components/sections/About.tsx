@@ -56,7 +56,7 @@ const founders = [
     expertise: "Web, Digital & Technology",
     expertiseIcon: Laptop,
     floatingIcon: Monitor,
-    image: "/team/bhuppi.png",
+    image: "/team/bhuppi_.png",
   },
 ];
 

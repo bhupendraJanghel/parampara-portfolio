@@ -50,21 +50,25 @@ export default function Navbar() {
           }`}
       >
         <div className={`max-w-7xl mx-auto px-6 flex items-center justify-between transition-all duration-300 ${scrolled ? "py-1.5" : "py-3"}`}>
-          <a
-            href="/#home"
-            onClick={(e) => handleScroll(e, "home")}
-            className="flex items-center gap-4 group z-50 cursor-pointer"
-          >
-            <div className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 transition-all duration-300">
+          <div className="flex items-center gap-4 z-50 select-none">
+            <div
+              onClick={() => window.triggerCelebration?.()}
+              className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 cursor-pointer active:scale-95 hover:scale-105 transition-all duration-300"
+              title="Click for a surprise celebration!"
+            >
               <Image
                 src="/parampara-logo.png"
                 alt="Parampara Events Logo"
                 fill
                 priority
-                className="object-contain group-hover:scale-105 transition-transform duration-300"
+                className="object-contain"
               />
             </div>
-            <div className="flex flex-col text-left">
+            <a
+              href="/#home"
+              onClick={(e) => handleScroll(e, "home")}
+              className="flex flex-col text-left cursor-pointer active:scale-95 transition-transform duration-200 group"
+            >
               <span className={`font-serif text-xl md:text-2xl font-bold tracking-[0.25em] leading-none transition-colors duration-300 ${isOpen || scrolled
                 ? "text-white group-hover:text-amber-100"
                 : "text-[#1b3225] group-hover:text-[#caa56c]"
@@ -74,8 +78,8 @@ export default function Navbar() {
               <span className="font-sans text-[9px] md:text-[10px] font-semibold tracking-[0.25em] text-[#caa56c] mt-2.5 leading-none">
                 DECOR & EVENTS
               </span>
-            </div>
-          </a>
+            </a>
+          </div>
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8 text-xs uppercase tracking-widest font-semibold">

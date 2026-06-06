@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import Image from "next/image";
@@ -8,8 +10,12 @@ export default function Footer() {
     <footer className="relative bg-[#1b3225] px-6 py-16 text-[#fbf8f1]">
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-12 md:flex-row">
         <div className="max-w-sm">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="relative w-16 h-16 shrink-0">
+          <div className="flex items-center gap-3 mb-6 select-none">
+            <div 
+              className="relative w-16 h-16 shrink-0 cursor-pointer active:scale-95 hover:scale-105 transition-all duration-300"
+              onClick={() => window.triggerCelebration?.()}
+              title="Click for a surprise celebration!"
+            >
               <Image
                 src="/parampara-logo.png"
                 alt="Parampara Events Logo"
