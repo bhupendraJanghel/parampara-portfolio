@@ -45,7 +45,7 @@ const founders = [
     expertise: "Decor & Styling",
     expertiseIcon: Palette,
     floatingIcon: Store,
-    image: "/team/nitesh.png",
+    image: "/team/nitesh.jpg",
   },
   {
     name: "Bhupendra Janghel",

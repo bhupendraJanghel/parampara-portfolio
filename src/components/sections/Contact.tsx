@@ -135,7 +135,10 @@ export default function Contact() {
             {/* Contacts details list */}
             <div className="space-y-4 font-sans text-xs sm:text-sm font-light mt-8 lg:mt-0">
               {/* Phone - Events */}
-              <div className="flex items-center gap-4 group">
+              <a
+                href={`tel:${CONTACT_INFO.events.phone}`}
+                className="flex items-center gap-4 group cursor-pointer w-fit"
+              >
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#caa56c]/40 bg-[#caa56c]/5 text-[#caa56c] shrink-0 transition-all group-hover:bg-[#caa56c]/10">
                   <Phone size={16} />
                 </div>
@@ -143,17 +146,17 @@ export default function Contact() {
                   <span className="text-[9px] text-stone-400 font-semibold tracking-wider uppercase leading-none mb-1">
                     Events Inquiry (Rumesh)
                   </span>
-                  <a
-                    href={`tel:${CONTACT_INFO.events.phone}`}
-                    className="text-stone-200 hover:text-[#caa56c] transition-colors font-medium text-xs sm:text-sm"
-                  >
+                  <span className="text-stone-200 group-hover:text-[#caa56c] transition-colors font-medium text-xs sm:text-sm">
                     {CONTACT_INFO.events.phone}
-                  </a>
+                  </span>
                 </div>
-              </div>
+              </a>
 
               {/* Phone - Decor */}
-              <div className="flex items-center gap-4 group">
+              <a
+                href={`tel:${CONTACT_INFO.decor.phone}`}
+                className="flex items-center gap-4 group cursor-pointer w-fit"
+              >
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#caa56c]/40 bg-[#caa56c]/5 text-[#caa56c] shrink-0 transition-all group-hover:bg-[#caa56c]/10">
                   <Phone size={16} />
                 </div>
@@ -161,17 +164,17 @@ export default function Contact() {
                   <span className="text-[9px] text-stone-400 font-semibold tracking-wider uppercase leading-none mb-1">
                     Decor Shop (Nitesh)
                   </span>
-                  <a
-                    href={`tel:${CONTACT_INFO.decor.phone}`}
-                    className="text-stone-200 hover:text-[#caa56c] transition-colors font-medium text-xs sm:text-sm"
-                  >
+                  <span className="text-stone-200 group-hover:text-[#caa56c] transition-colors font-medium text-xs sm:text-sm">
                     {CONTACT_INFO.decor.phone}
-                  </a>
+                  </span>
                 </div>
-              </div>
+              </a>
 
               {/* Email */}
-              <div className="flex items-center gap-4 group">
+              <a
+                href={`mailto:${CONTACT_INFO.events.email}`}
+                className="flex items-center gap-4 group cursor-pointer w-fit"
+              >
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#caa56c]/40 bg-[#caa56c]/5 text-[#caa56c] shrink-0 transition-all group-hover:bg-[#caa56c]/10">
                   <Mail size={16} />
                 </div>
@@ -179,17 +182,19 @@ export default function Contact() {
                   <span className="text-[9px] text-stone-400 font-semibold tracking-wider uppercase leading-none mb-1">
                     Email Us
                   </span>
-                  <a
-                    href={`mailto:${CONTACT_INFO.events.email}`}
-                    className="text-stone-200 hover:text-[#caa56c] transition-colors font-medium text-xs sm:text-sm break-all"
-                  >
+                  <span className="text-stone-200 group-hover:text-[#caa56c] transition-colors font-medium text-xs sm:text-sm break-all">
                     {CONTACT_INFO.events.email}
-                  </a>
+                  </span>
                 </div>
-              </div>
+              </a>
 
               {/* Location */}
-              <div className="flex items-center gap-4 group">
+              <a
+                href={SOCIALS.googleMaps}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 group cursor-pointer w-fit"
+              >
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#caa56c]/40 bg-[#caa56c]/5 text-[#caa56c] shrink-0 transition-all group-hover:bg-[#caa56c]/10">
                   <MapPin size={16} />
                 </div>
@@ -197,16 +202,11 @@ export default function Contact() {
                   <span className="text-[9px] text-stone-400 font-semibold tracking-wider uppercase leading-none mb-1">
                     Office Location
                   </span>
-                  <a
-                    href={SOCIALS.googleMaps}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-stone-200 hover:text-[#caa56c] transition-colors font-medium text-xs sm:text-sm leading-snug"
-                  >
+                  <span className="text-stone-200 group-hover:text-[#caa56c] transition-colors font-medium text-xs sm:text-sm leading-snug">
                     Awanti Bai Chowk, Kurud Rd, Kohka, Bhilai, CG
-                  </a>
+                  </span>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 
