@@ -213,9 +213,10 @@ export default function InstagramFeed() {
   }, [isLoading, posts]);
 
   return (
-    <section className="bg-[#fbf8f1] px-6 pb-12 md:pb-16 pt-0">
-      <div className="mx-auto max-w-7xl border-t border-stone-200/50 pt-12 md:pt-16 text-center">
-        <div className="flex flex-col items-center text-center">
+    <section className="bg-[#fbf8f1] px-0 pb-12 md:pb-16 pt-0">
+      <div className="w-full text-center">
+        {/* Centered Header Container with Border */}
+        <div className="mx-auto max-w-7xl px-6 border-t border-stone-200/50 pt-12 md:pt-16 flex flex-col items-center text-center">
           {/* Instagram Badges */}
           <div className="flex flex-wrap items-center justify-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-sm">
@@ -238,10 +239,10 @@ export default function InstagramFeed() {
           </p>
         </div>
 
-        {/* Infinite Marquee Container */}
-        <div className="relative mx-auto w-full overflow-hidden mt-12 py-4">
+        {/* Infinite Marquee Container - Full Width */}
+        <div className="relative w-full overflow-hidden mt-12 py-4">
           {isLoading ? (
-            <div className="flex gap-6 justify-center px-6 sm:px-16 overflow-x-hidden">
+            <div className="flex gap-6 justify-center px-0 overflow-x-hidden">
               {[...Array(3)].map((_, i) => (
                 <SkeletonCard key={i} />
               ))}
@@ -249,7 +250,7 @@ export default function InstagramFeed() {
           ) : (
             <div
               ref={containerRef}
-              className="flex overflow-x-auto scrollbar-hide gap-6 select-none px-6 sm:px-16"
+              className="flex overflow-x-auto scrollbar-hide gap-6 select-none px-0"
             >
               {/* Duplicated list of posts for seamless loop */}
               {[...posts, ...posts].map((post, index) => (
@@ -311,6 +312,19 @@ export default function InstagramFeed() {
                         sizes="(max-width: 768px) 280px, 320px"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
+                      
+                      {/* Gradient shadow at the bottom for text legibility */}
+                      <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/40 to-transparent pointer-events-none z-10" />
+
+                      {/* Likes/Comments Overlay */}
+                      <div className="absolute bottom-3 left-4 z-10 flex items-center gap-3.5 text-white font-sans text-[10px] font-bold">
+                        <span className="flex items-center gap-1">
+                          <Heart size={12} /> {post.likes}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <MessageCircle size={12} /> {post.comments}
+                        </span>
+                      </div>
                     </div>
 
                     {/* Post Caption */}
@@ -318,24 +332,11 @@ export default function InstagramFeed() {
                       {post.caption}
                     </p>
                   </div>
-
-                  {/* Post Footer Metrics */}
-                  <div className="mt-4 border-t border-stone-100 pt-3 flex items-center gap-4 text-[10px] font-bold text-stone-500 px-4">
-                    <span className="flex items-center gap-1 hover:text-[#ee2a7b] transition-colors">
-                      <Heart size={12} className="fill-stone-100 group-hover:fill-current" /> {post.likes}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <MessageCircle size={12} /> {post.comments}
-                    </span>
-                  </div>
                 </a>
               ))}
             </div>
           )}
 
-          {/* Left and Right Fade Overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 sm:w-64 bg-gradient-to-r from-[#fbf8f1] to-[#fbf8f1]/0 z-20 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 sm:w-64 bg-gradient-to-l from-[#fbf8f1] to-[#fbf8f1]/0 z-20 pointer-events-none" />
         </div>
       </div>
     </section>
