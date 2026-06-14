@@ -64,8 +64,21 @@ const SkeletonCard = () => (
 
 export default function InstagramFeed() {
   const [posts, setPosts] = useState<InstagramPost[]>([]);
+  const [username, setUsername] = useState("theparamparaevents");
+  const [profilePictureUrl, setProfilePictureUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Helper to compute initials from username
+  const getInitials = (name: string) => {
+    if (!name) return "PE";
+    const clean = name.replace(/[^a-zA-Z0-9]/g, " ").trim();
+    const parts = clean.split(/\s+/);
+    if (parts.length >= 2) {
+      return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+    return name.slice(0, 2).toUpperCase();
+  };
 
   useEffect(() => {
     async function fetchPosts() {
@@ -74,6 +87,12 @@ export default function InstagramFeed() {
         if (res.ok) {
           const data = await res.json();
           setPosts(data.posts || []);
+          if (data.username) {
+            setUsername(data.username);
+          }
+          if (data.profilePictureUrl) {
+            setProfilePictureUrl(data.profilePictureUrl);
+          }
         }
       } catch (error) {
         console.error("Failed to fetch Instagram posts:", error);
@@ -200,7 +219,7 @@ export default function InstagramFeed() {
           {/* Instagram Badges */}
           <div className="flex flex-wrap items-center justify-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-sm">
-              <InstagramLogo /> {SOCIALS.instagramEventsUsername}
+              <InstagramLogo /> @{username.replace(/^@/, "")}
             </span>
           </div>
 
@@ -239,20 +258,33 @@ export default function InstagramFeed() {
                   target="_blank"
                   rel="noopener noreferrer"
                   key={index}
-                  className="w-[280px] sm:w-[320px] shrink-0 rounded-3xl border border-stone-200/50 bg-white p-4 shadow-[0_4px_20px_rgba(27,50,37,0.02)] relative flex flex-col justify-between text-left hover:shadow-[0_8px_30px_rgba(27,50,37,0.05)] transition-shadow duration-300 group"
+                  className="w-[280px] sm:w-[320px] shrink-0 rounded-2xl border border-stone-200 bg-white p-0 pb-4 shadow-[0_4px_20px_rgba(27,50,37,0.02)] relative flex flex-col justify-between text-left hover:shadow-[0_8px_30px_rgba(27,50,37,0.05)] transition-shadow duration-300 group"
                 >
                   <div>
                     {/* Post Header */}
-                    <div className="mb-3 flex items-center justify-between">
+                    <div className="mb-3 flex items-center justify-between px-4 pt-4">
                       <div className="flex items-center gap-2">
                         <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] p-[1.5px]">
-                          <div className="flex h-full w-full items-center justify-center rounded-full bg-white font-sans text-[8px] font-bold text-stone-800">
-                            PE
-                          </div>
+                          {profilePictureUrl ? (
+                            <div className="relative h-full w-full overflow-hidden rounded-full">
+                              <Image
+                                src={profilePictureUrl}
+                                alt={username}
+                                fill
+                                unoptimized={profilePictureUrl.startsWith("http")}
+                                sizes="28px"
+                                className="object-cover"
+                              />
+                            </div>
+                          ) : (
+                            <div className="flex h-full w-full items-center justify-center rounded-full bg-white font-sans text-[8px] font-bold text-stone-800">
+                              {getInitials(username)}
+                            </div>
+                          )}
                         </div>
                         <div>
                           <h4 className="font-sans text-[10px] font-bold tracking-wide text-[#1b3225]">
-                            paramparaevents
+                            {username}
                           </h4>
                           <p className="font-sans text-[8px] text-stone-400">
                             {post.date}
@@ -270,7 +302,7 @@ export default function InstagramFeed() {
                     </div>
 
                     {/* Post Image Container */}
-                    <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-stone-50 mb-3">
+                    <div className="relative aspect-square w-full overflow-hidden bg-stone-50 border-y border-stone-100">
                       <Image
                         src={post.imageUrl}
                         alt="Instagram Post"
@@ -282,13 +314,13 @@ export default function InstagramFeed() {
                     </div>
 
                     {/* Post Caption */}
-                    <p className="font-sans text-[10px] leading-relaxed text-stone-600 line-clamp-2 px-1">
+                    <p className="font-sans text-[10px] leading-relaxed text-stone-600 line-clamp-2 px-4 mt-3">
                       {post.caption}
                     </p>
                   </div>
 
                   {/* Post Footer Metrics */}
-                  <div className="mt-4 border-t border-stone-100 pt-3 flex items-center gap-4 text-[10px] font-bold text-stone-500 px-1">
+                  <div className="mt-4 border-t border-stone-100 pt-3 flex items-center gap-4 text-[10px] font-bold text-stone-500 px-4">
                     <span className="flex items-center gap-1 hover:text-[#ee2a7b] transition-colors">
                       <Heart size={12} className="fill-stone-100 group-hover:fill-current" /> {post.likes}
                     </span>
